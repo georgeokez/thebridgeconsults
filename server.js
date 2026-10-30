@@ -65,7 +65,7 @@ function formStateFromQuery(req) {
   const status = req.query.sent === '1' ? 'ok' : req.query.sent === '0' ? 'err' : '';
   const message =
     status === 'ok'
-      ? 'Thank you — your enquiry has been sent. We’ll be in touch shortly.'
+      ? 'Thank you, your enquiry has been sent. We’ll be in touch shortly.'
       : status === 'err'
       ? `Sorry, we couldn’t send your enquiry. Please check the form, or email us at ${site.email}.`
       : '';
@@ -75,7 +75,7 @@ function formStateFromQuery(req) {
 app.get('/', (req, res) => {
   res.render('home', {
     page: 'home',
-    title: `${site.name} — Recruitment & HR Solutions`,
+    title: `${site.name} | Recruitment & HR Solutions`,
     form: formStateFromQuery(req),
   });
 });
@@ -83,7 +83,7 @@ app.get('/', (req, res) => {
 app.get('/services', (req, res) => {
   res.render('services', {
     page: 'services',
-    title: `Services — ${site.name}`,
+    title: `Services | ${site.name}`,
     description: 'Recruitment, HR outsourcing and business partner support, and staff training and development from The Bridge.',
   });
 });
@@ -91,7 +91,7 @@ app.get('/services', (req, res) => {
 app.get('/about', (req, res) => {
   res.render('about', {
     page: 'about',
-    title: `About — ${site.name}`,
+    title: `About | ${site.name}`,
     description: 'The Bridge is a recruitment, HR support and business partner firm built for organisations that need workforce solutions to work.',
   });
 });
@@ -99,14 +99,14 @@ app.get('/about', (req, res) => {
 app.get('/contact', (req, res) => {
   res.render('contact', {
     page: 'contact',
-    title: `Contact — ${site.name}`,
+    title: `Contact | ${site.name}`,
     description: 'Book a consultation with The Bridge. Tell us what you need and we’ll come back with a proposal.',
     form: formStateFromQuery(req),
   });
 });
 
 app.get('/privacy', (req, res) => {
-  res.render('privacy', { page: 'privacy', title: `Privacy policy — ${site.name}` });
+  res.render('privacy', { page: 'privacy', title: `Privacy policy | ${site.name}` });
 });
 
 app.get('/robots.txt', (req, res) => {
@@ -192,9 +192,9 @@ app.post('/contact', async (req, res) => {
     'New enquiry from the website',
     '',
     `Name:     ${data.name}`,
-    `Company:  ${data.company || '—'}`,
+    `Company:  ${data.company || 'Not provided'}`,
     `Email:    ${data.email}`,
-    `Phone:    ${data.phone || '—'}`,
+    `Phone:    ${data.phone || 'Not provided'}`,
     `Interest: ${serviceLabel}`,
     '',
     'Message:',
@@ -207,7 +207,7 @@ app.post('/contact', async (req, res) => {
         from: process.env.MAIL_FROM || process.env.SMTP_USER,
         to: process.env.MAIL_TO || site.email,
         replyTo: { name: data.name, address: data.email },
-        subject: `Website enquiry: ${serviceLabel} — ${data.name}${data.company ? `, ${data.company}` : ''}`,
+        subject: `Website enquiry: ${serviceLabel}, from ${data.name}${data.company ? ` (${data.company})` : ''}`,
         text,
       });
     } else {
@@ -223,7 +223,7 @@ app.post('/contact', async (req, res) => {
 // ---------- Errors ----------
 app.use((req, res) => {
   res.status(404).render('error', {
-    title: `Page not found — ${site.name}`,
+    title: `Page not found | ${site.name}`,
     code: '404',
     heading: 'We couldn’t find that page.',
     text: 'The page you’re looking for may have moved or no longer exists.',
@@ -235,7 +235,7 @@ app.use((err, req, res, next) => {
   console.error(err);
   if (res.headersSent) return;
   res.status(err.status || 500).render('error', {
-    title: `Something went wrong — ${site.name}`,
+    title: `Something went wrong | ${site.name}`,
     code: String(err.status || 500),
     heading: 'Something went wrong.',
     text: 'Please try again in a moment.',
@@ -245,7 +245,7 @@ app.use((err, req, res, next) => {
 if (require.main === module) {
   app.listen(PORT, () => {
     console.log(`The Bridge website running at http://localhost:${PORT}`);
-    if (!transporter) console.log('SMTP_HOST is not set — enquiries will be printed here instead of emailed.');
+    if (!transporter) console.log('SMTP_HOST is not set, so enquiries will be printed here instead of emailed.');
   });
 }
 

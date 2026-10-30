@@ -1,6 +1,6 @@
-# The Bridge — Website
+# The Bridge: Website
 
-Node/Express build of **Design A — Corporate Clarity** from the Claude Design canvas "The Bridge — Website Samples".
+Node/Express build of **Design A (Corporate Clarity)** from the Claude Design canvas "The Bridge: Website Samples".
 
 ## Run locally
 

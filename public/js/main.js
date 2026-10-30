@@ -207,7 +207,7 @@
         if (res.ok) {
           form.reset();
           Object.keys(rules).forEach(function (n) { setFieldError(n, ''); });
-          setStatus('Thank you — your enquiry has been sent. We’ll be in touch shortly.', 'ok');
+          setStatus('Thank you, your enquiry has been sent. We’ll be in touch shortly.', 'ok');
         } else {
           if (res.errors) Object.keys(res.errors).forEach(function (n) { setFieldError(n, res.errors[n]); });
           setStatus(res.error || 'Sorry, we couldn’t send your enquiry. Please email thebridgerecruiter@gmail.com.', 'err');

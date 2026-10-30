@@ -7,7 +7,7 @@ module.exports = {
   legalName: 'TheBridge Professional Services Limited',
   tagline: 'Connecting Talent. Building Businesses.',
   description:
-    'The Bridge is a recruitment, HR outsourcing and business partner firm for organisations that need workforce solutions to work — not just look good on paper.',
+    'The Bridge is a recruitment, HR outsourcing and business partner firm for organisations that need workforce solutions to work, not just look good on paper.',
 
   email: 'thebridgerecruiter@gmail.com',
   phone: '0802 543 5028',
@@ -54,9 +54,9 @@ module.exports = {
     {
       key: 'recruitment',
       name: 'Recruitment Services',
-      summary: 'The right people, in the right roles, faster. We manage the full hiring cycle — local and expatriate, end to end.',
+      summary: 'The right people, in the right roles, faster. We manage the full hiring cycle for local and expatriate roles, end to end.',
       headline: 'The right people. In the right roles. Faster.',
-      intro: 'We manage the full hiring cycle, from understanding the role to placing the right candidate — local and expatriate, end to end.',
+      intro: 'We manage the full hiring cycle, from understanding the role to placing the right candidate, for local and expatriate roles alike.',
       points: [
         'Role scoping and consultation',
         'Targeted sourcing across professional channels and talent networks',
@@ -69,9 +69,9 @@ module.exports = {
     {
       key: 'hr-outsourcing',
       name: 'HR Outsourcing & Business Partner',
-      summary: 'All the workforce infrastructure, none of the overhead — onboarding, documentation, policy and compliance.',
+      summary: 'All the workforce infrastructure, none of the overhead: onboarding, documentation, policy and compliance.',
       headline: 'All the workforce infrastructure. None of the overhead.',
-      intro: 'When business priorities compete for time, HR slips — and gaps open in workforce management and compliance. We close them.',
+      intro: 'When business priorities compete for time, HR slips and gaps open in workforce management and compliance. We close them.',
       points: [
         'Employee onboarding coordination',
         'Workforce administration and documentation',
@@ -118,10 +118,10 @@ module.exports = {
 
   reasons: [
     { title: 'Business-first thinking', short: 'Every recommendation is grounded in your operational goals.', long: 'Hiring is a business decision. Every recommendation is grounded in your operational goals.' },
-    { title: 'Quality over volume', short: 'Not 30 CVs — the right candidates, vetted, with clear reasoning.', long: 'We don’t send 30 CVs and hope. We send the right candidates, vetted, with clear reasoning.' },
+    { title: 'Quality over volume', short: 'Not 30 CVs. Just the right candidates, vetted, with clear reasoning.', long: 'We don’t send 30 CVs and hope. We send the right candidates, vetted, with clear reasoning.' },
     { title: 'End-to-end accountability', short: 'From first brief to post-placement follow-up, we own the process.', long: 'From first brief to post-placement follow-up, we own the process.' },
-    { title: 'Industry breadth', short: 'The network and context to source effectively across sectors.', long: 'Professional services, technology, finance, healthcare, FMCG and more — with the network and context to source effectively across sectors.' },
-    { title: 'Scalable HR support', short: 'One critical role or a whole onboarding system — we scale with you.', long: 'One critical role or an entire onboarding system — our support scales with you.' },
+    { title: 'Industry breadth', short: 'The network and context to source effectively across sectors.', long: 'Professional services, technology, finance, healthcare, FMCG and more, with the network and context to source effectively across sectors.' },
+    { title: 'Scalable HR support', short: 'From one critical role to a whole onboarding system, we scale with you.', long: 'Whether it’s one critical role or an entire onboarding system, our support scales with you.' },
     { title: 'Long-term relationships', short: 'Partnerships, not transactions. Clients return because it works.', long: 'Partnerships, not transactions. Our clients come back because it works.' },
   ],
 
