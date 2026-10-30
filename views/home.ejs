@@ -1,0 +1,138 @@
+<%- include('partials/head') %>
+
+<section class="hero bg-tint">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow"><%= site.tagline %></p>
+      <h1 class="h1">Your people are your business.</h1>
+      <p class="lead"><%= site.description %></p>
+      <div class="actions">
+        <a href="#contact" class="btn btn-primary">Book a consultation</a>
+        <a href="/services" class="btn btn-outline">Explore our services</a>
+      </div>
+      <a href="/about#credentials" class="trust-line">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.6 8 11 4.6-1.4 8-6 8-11V5l-8-3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m8.5 12 2.5 2.5 4.5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Registered with the Corporate Affairs Commission · RC <%= site.registration.rcNumber %></span>
+      </a>
+    </div>
+    <img class="photo photo-hero" src="/images/handshake.jpg" alt="Two professionals shaking hands" width="1024" height="620" fetchpriority="high">
+  </div>
+</section>
+
+<section class="clients-strip" aria-label="Organisations we have supported">
+  <div class="container clients-inner">
+    <span class="clients-label">Organisations we have supported</span>
+    <ul class="sr-only">
+      <% site.clients.forEach(function (c) { %><li><%= c %></li><% }) %>
+    </ul>
+    <%# Visual loop: the names are repeated to fill the strip, then the whole set is duplicated so the scroll can wrap seamlessly. %>
+    <% var reps = Math.max(2, Math.ceil(6 / Math.max(site.clients.length, 1))); var loop = []; for (var r = 0; r < reps; r++) loop = loop.concat(site.clients); %>
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <% [0, 1].forEach(function () { %>
+          <ul class="marquee-group">
+            <% loop.forEach(function (c, i) { %><li class="client-name<%= i >= site.clients.length ? ' is-repeat' : '' %>"><%= c %></li><% }) %>
+          </ul>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="section">
+  <div class="container stack-lg">
+    <div class="section-head">
+      <p class="eyebrow">The workforce challenge</p>
+      <h2 class="h2">People problems eventually become business problems.</h2>
+      <p class="lead-sm">They show up as missed deadlines, rising turnover and HR backlogs that never quite clear. Left unaddressed, they compound.</p>
+    </div>
+    <div class="card-grid">
+      <% site.challenges.forEach(function (c) { %>
+        <div class="card">
+          <h3 class="h4"><%= c.title %></h3>
+          <p><%= c.body %></p>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="section bg-navy">
+  <div class="container stack-lg">
+    <div class="section-head-row">
+      <div class="section-head">
+        <p class="eyebrow eyebrow-light">What we do</p>
+        <h2 class="h2">HR support that does more than fill vacancies.</h2>
+      </div>
+      <a href="/services" class="link-arrow link-light">See all services <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="service-grid">
+      <% site.services.forEach(function (s, i) { %>
+        <article class="service-card">
+          <span class="service-num"><%= String(i + 1).padStart(2, '0') %></span>
+          <h3 class="h3"><%= s.name %></h3>
+          <p><%= s.summary %></p>
+          <a href="/services#<%= s.key %>" class="link-arrow">Learn more <span class="sr-only">about <%= s.name %></span><span aria-hidden="true">→</span></a>
+        </article>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container stack-lg">
+    <div class="section-head">
+      <p class="eyebrow">How we work</p>
+      <h2 class="h2">A clear, accountable process — so you always know where things stand.</h2>
+    </div>
+    <ol class="process">
+      <% site.process.forEach(function (p, i) { %>
+        <li>
+          <span class="process-num"><%= String(i + 1).padStart(2, '0') %></span>
+          <strong><%= p.title %></strong>
+          <span><%= p.body %></span>
+        </li>
+      <% }) %>
+    </ol>
+  </div>
+</section>
+
+<section class="section bg-tint">
+  <div class="container two-col">
+    <div class="stack">
+      <p class="eyebrow">Why partner with The Bridge</p>
+      <h2 class="h2">Practical, modern and business-aware.</h2>
+      <div class="photo-zoom"><img class="photo photo-md" src="/images/puzzle.jpg" alt="Team members joining puzzle pieces together" width="574" height="395" loading="lazy"></div>
+      <div class="stack-sm">
+        <h3 class="h5">Industries we support</h3>
+        <ul class="chips">
+          <% site.industries.forEach(function (ind) { %><li><%= ind %></li><% }) %>
+        </ul>
+      </div>
+    </div>
+    <div class="reasons">
+      <% site.reasons.forEach(function (r) { %>
+        <div class="reason">
+          <h3 class="h5"><%= r.title %></h3>
+          <p><%= r.short %></p>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="section">
+  <div class="container two-col">
+    <div class="stack contact-intro">
+      <p class="eyebrow">Get in touch</p>
+      <h2 class="h2">Strong businesses are built on strong people. Let us help you build yours.</h2>
+      <p class="lead-sm">Pricing is tailored to the scope of each engagement. Tell us what you need and we’ll come back with a proposal.</p>
+      <%- include('partials/contact-details') %>
+    </div>
+    <div class="form-panel">
+      <%- include('partials/enquiry-form', { source: 'home' }) %>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/foot') %>

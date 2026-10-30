@@ -1,0 +1,47 @@
+<%- include('partials/head') %>
+
+<section class="page-hero bg-navy">
+  <div class="container stack">
+    <p class="eyebrow eyebrow-light">Legal</p>
+    <h1 class="h1">Privacy policy</h1>
+    <p class="lead lead-light">How <%= site.name %> handles the information you share with us through this website.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container prose">
+    <p class="prose-meta">Last updated: 30 October 2026</p>
+
+    <h2>Who we are</h2>
+    <p><%= site.legalName %> (RC <%= site.registration.rcNumber %>), trading as <%= site.brandName %> (“The Bridge”, “we”, “us”), provides recruitment, HR outsourcing and business partner, and staff training and development services. If you have any questions about this policy or your information, contact us at <a href="mailto:<%= site.email %>"><%= site.email %></a>.</p>
+
+    <h2>Information we collect</h2>
+    <p>When you submit the enquiry form on this website, we collect the details you provide: your name, company, email address, phone number, the service you are interested in, and your message. We do not ask for, and ask you not to include, sensitive personal information in the form.</p>
+    <p>Like most websites, our hosting provider may keep standard server logs (such as IP address, browser type and the pages requested) for security and to keep the site running reliably.</p>
+
+    <h2>How we use your information</h2>
+    <ul>
+      <li>To respond to your enquiry and arrange a consultation.</li>
+      <li>To prepare and send a proposal you have asked for.</li>
+      <li>To keep a record of our correspondence with you.</li>
+    </ul>
+    <p>We do not sell your information, and we do not use it for unrelated marketing without your permission.</p>
+
+    <h2>Sharing your information</h2>
+    <p>Your enquiry is delivered to us by email. The service providers that host this website and deliver our email process your information on our behalf and only for those purposes. We will only share your information with anyone else where you have asked us to, or where the law requires it.</p>
+
+    <h2>Cookies and tracking</h2>
+    <p>This website does not use advertising or analytics cookies, and it does not load content from third-party services when you browse it.</p>
+
+    <h2>How long we keep it</h2>
+    <p>We keep enquiry details only for as long as we need them to respond to you and manage any resulting relationship, after which they are deleted.</p>
+
+    <h2>Your rights</h2>
+    <p>You can ask us at any time to access, correct or delete the personal information we hold about you, or to stop using it. Email <a href="mailto:<%= site.email %>"><%= site.email %></a> and we will respond as quickly as we can.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>We may update this policy from time to time. The date at the top of this page shows when it was last changed.</p>
+  </div>
+</section>
+
+<%- include('partials/foot') %>

@@ -1,0 +1,47 @@
+<%# Shared enquiry form. Expects: form = { values, status, message }, source = 'home' | 'contact' %>
+<form class="enquiry" id="enquiry" method="post" action="/contact" novalidate>
+  <input type="hidden" name="source" value="<%= source %>">
+  <div class="field">
+    <label for="f-name">Full name <span class="req" aria-hidden="true">*</span></label>
+    <input id="f-name" type="text" name="name" autocomplete="name" required maxlength="120">
+    <p class="field-error" id="f-name-err"></p>
+  </div>
+  <div class="field">
+    <label for="f-company">Company</label>
+    <input id="f-company" type="text" name="company" autocomplete="organization" maxlength="160">
+  </div>
+  <div class="field">
+    <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
+    <input id="f-email" type="email" name="email" autocomplete="email" required maxlength="200">
+    <p class="field-error" id="f-email-err"></p>
+  </div>
+  <div class="field">
+    <label for="f-phone">Phone</label>
+    <input id="f-phone" type="tel" name="phone" autocomplete="tel" maxlength="40">
+    <p class="field-error" id="f-phone-err"></p>
+  </div>
+  <div class="field field-full">
+    <label for="f-service">What do you need help with? <span class="req" aria-hidden="true">*</span></label>
+    <select id="f-service" name="service" required>
+      <option value="" disabled<%- form.values.service ? '' : ' selected' %>>Select an option</option>
+      <% site.enquiryTypes.forEach(function (t) { %>
+        <option value="<%= t.value %>"<%- form.values.service === t.value ? ' selected' : '' %>><%= t.label %></option>
+      <% }) %>
+    </select>
+    <p class="field-error" id="f-service-err"></p>
+  </div>
+  <div class="field field-full">
+    <label for="f-message">Message <span class="req" aria-hidden="true">*</span></label>
+    <textarea id="f-message" name="message" rows="5" required maxlength="5000"></textarea>
+    <p class="field-error" id="f-message-err"></p>
+  </div>
+  <div class="hp" aria-hidden="true">
+    <label for="f-website">Leave this field empty</label>
+    <input id="f-website" type="text" name="website" tabindex="-1" autocomplete="off">
+  </div>
+  <div class="field-full form-footer">
+    <button type="submit" class="btn btn-primary btn-block">Request a consultation</button>
+    <p class="form-note">Fields marked <span class="req">*</span> are required. We’ll only use your details to respond to your enquiry — see our <a href="/privacy">privacy policy</a>.</p>
+    <p class="form-status<%= form.status ? ' ' + form.status : '' %>" role="status" aria-live="polite" tabindex="-1"><%= form.message %></p>
+  </div>
+</form>

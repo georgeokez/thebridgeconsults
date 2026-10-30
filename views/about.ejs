@@ -1,0 +1,114 @@
+<%- include('partials/head') %>
+<% var team = site.team.filter(function (m) { return m.name || m.role; }); var flip = team.length > 0; %>
+
+<section class="page-hero bg-navy">
+  <div class="container stack">
+    <p class="eyebrow eyebrow-light">About The Bridge</p>
+    <h1 class="h1 measure-h">Practical, modern and business-aware.</h1>
+    <p class="lead lead-light">When the wrong people are in the wrong roles — or the right roles stay vacant too long — the cost shows up everywhere. The Bridge exists to fix that.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container two-col two-col-center">
+    <div class="stack">
+      <p class="eyebrow">Who we are</p>
+      <h2 class="h2">We go beyond filling roles — to building high-performing teams.</h2>
+      <p class="muted">The Bridge is a recruitment, HR support and business partner firm built for organisations that need workforce solutions to work. We combine structured hiring processes, HR outsourcing support and workforce development into a single, operationally aware partnership.</p>
+      <p class="muted">We have supported organisations including <%= site.clients.join(' and ') %> — from successful recruitment projects to full HR business partner services covering talent acquisition, onboarding, employee relations, performance management and HR advisory.</p>
+    </div>
+    <div class="photo-zoom"><img class="photo photo-lg" src="/images/puzzle.jpg" alt="Team members joining puzzle pieces together" width="574" height="395"></div>
+  </div>
+</section>
+
+<% if (team.length) { %>
+<section id="team" class="section bg-tint">
+  <div class="container stack-lg">
+    <div class="section-head">
+      <p class="eyebrow">Meet the team</p>
+      <h2 class="h2">The people behind The Bridge.</h2>
+    </div>
+    <div class="team-grid<%= team.length === 1 && team[0].bio ? ' team-single' : '' %>">
+      <% team.forEach(function (m) { %>
+        <article class="team-card">
+          <img class="team-photo" src="<%= m.photo.src %>" alt="Portrait of <%= m.name || ('our ' + m.role) %>" width="<%= m.photo.w %>" height="<%= m.photo.h %>" loading="lazy">
+          <div class="team-body">
+            <% if (m.name) { %>
+              <h3 class="h3"><%= m.name %></h3>
+              <% if (m.role) { %><p class="team-role"><%= m.role %></p><% } %>
+            <% } else { %>
+              <h3 class="h3"><%= m.role %></h3>
+            <% } %>
+            <% if (m.bio) { %><p class="muted"><%= m.bio %></p><% } %>
+          </div>
+        </article>
+      <% }) %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<section class="section<%= flip ? '' : ' bg-tint' %>">
+  <div class="container stack-lg">
+    <div class="section-head">
+      <p class="eyebrow">Why partner with The Bridge</p>
+      <h2 class="h2">What our clients can count on.</h2>
+    </div>
+    <div class="card-grid">
+      <% site.reasons.forEach(function (r) { %>
+        <div class="card card-white">
+          <h3 class="h4"><%= r.title %></h3>
+          <p><%= r.long %></p>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="section<%= flip ? ' bg-tint' : '' %>">
+  <div class="container stack-lg">
+    <div class="section-head">
+      <p class="eyebrow">How we work</p>
+      <h2 class="h2">A clear, accountable process — so you always know where things stand.</h2>
+    </div>
+    <ol class="process">
+      <% site.process.forEach(function (p, i) { %>
+        <li>
+          <span class="process-num"><%= String(i + 1).padStart(2, '0') %></span>
+          <strong><%= p.title %></strong>
+          <span><%= p.body %></span>
+        </li>
+      <% }) %>
+    </ol>
+  </div>
+</section>
+
+<section class="section<%= flip ? '' : ' bg-tint' %>">
+  <div class="container two-col">
+    <div class="stack">
+      <p class="eyebrow">Industries we support</p>
+      <h2 class="h2-sm">Sector context that makes sourcing effective.</h2>
+    </div>
+    <ul class="chips chips-lg">
+      <% site.industries.forEach(function (ind) { %><li><%= ind %></li><% }) %>
+    </ul>
+  </div>
+</section>
+
+<section id="credentials" class="section<%= flip ? ' bg-tint' : '' %>">
+  <div class="container credentials credentials-single">
+    <div class="stack">
+      <p class="eyebrow">Company registration</p>
+      <h2 class="h2">Registered and verifiable.</h2>
+      <p class="muted">The Bridge is the trading name of <%= site.legalName %>, a company incorporated in Nigeria under the <%= site.registration.act %>. We hold a Certificate of Incorporation issued by the Corporate Affairs Commission.</p>
+      <div class="cert-badge">
+        <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.4 9.6 8 11 4.6-1.4 8-6 8-11V5l-8-3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m8.5 12 2.5 2.5 4.5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div><strong>Certificate of Incorporation</strong><span>Issued by the Corporate Affairs Commission · RC <%= site.registration.rcNumber %></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/cta', { heading: 'Let’s talk about your team.', text: 'Strong businesses are built on strong people. Let us help you build yours.', button: 'Book a consultation' }) %>
+
+<%- include('partials/foot') %>

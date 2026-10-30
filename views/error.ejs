@@ -1,0 +1,15 @@
+<%- include('partials/head') %>
+
+<section class="section error-page">
+  <div class="container stack">
+    <p class="eyebrow">Error <%= code %></p>
+    <h1 class="h1"><%= heading %></h1>
+    <p class="lead"><%= text %></p>
+    <div class="actions">
+      <a href="/" class="btn btn-primary">Back to home</a>
+      <a href="/contact" class="btn btn-outline">Contact us</a>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/foot') %>

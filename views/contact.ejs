@@ -1,0 +1,32 @@
+<%- include('partials/head') %>
+
+<section class="page-hero bg-navy">
+  <div class="container stack">
+    <p class="eyebrow eyebrow-light">Contact</p>
+    <h1 class="h1 measure-h">Let’s talk about your team.</h1>
+    <p class="lead lead-light">Pricing is tailored to the scope of each engagement. Tell us what you need and we’ll come back with a proposal.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container two-col">
+    <div class="stack contact-intro">
+      <h2 class="h2-sm">Get in touch</h2>
+      <p class="muted">Use the form to request a consultation, or contact us directly.</p>
+      <%- include('partials/contact-details') %>
+      <div class="next-steps">
+        <h3 class="h5">What happens next</h3>
+        <ol>
+          <li><strong>We review your enquiry</strong> and get in touch to arrange a conversation.</li>
+          <li><strong>Consultation &amp; needs assessment</strong> — we listen, assess the gaps and recommend.</li>
+          <li><strong>A tailored proposal</strong> that fits your objectives and hiring requirements.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="form-panel">
+      <%- include('partials/enquiry-form', { source: 'contact' }) %>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/foot') %>

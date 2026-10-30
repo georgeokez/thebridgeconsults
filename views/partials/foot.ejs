@@ -1,0 +1,51 @@
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="/images/logo-white.png" alt="The Bridge Consults" width="110" height="70">
+        <p>Recruitment and HR solutions. <%= site.tagline %></p>
+        <div class="footer-social">
+          <% site.social.forEach(function (s) { %><a href="<%= s.url %>" target="_blank" rel="noopener noreferrer"><%= s.label %></a><% }) %>
+        </div>
+      </div>
+      <div>
+        <h2 class="footer-title">Company</h2>
+        <ul class="footer-list">
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/services">Services</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="footer-title">Services</h2>
+        <ul class="footer-list">
+          <% site.services.forEach(function (s) { %><li><a href="/services#<%= s.key %>"><%= s.name %></a></li><% }) %>
+        </ul>
+      </div>
+      <div>
+        <h2 class="footer-title">Get in touch</h2>
+        <ul class="footer-list">
+          <li><a href="mailto:<%= site.email %>"><%= site.email %></a></li>
+          <li><a href="<%= site.phoneHref %>"><%= site.phone %></a></li>
+          <li><a href="/contact">Book a consultation</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <%= year %> <%= site.legalName %>. All rights reserved.</span>
+      <a href="/privacy">Privacy policy</a>
+    </div>
+  </div>
+</footer>
+
+<a href="#top" class="to-top" aria-label="Back to top">
+  <svg class="to-top-ring" viewBox="0 0 52 52" aria-hidden="true"><circle cx="26" cy="26" r="24" /></svg>
+  <svg class="to-top-arrow" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</a>
+
+<script src="/js/main.js" defer></script>
+</body>
+</html>

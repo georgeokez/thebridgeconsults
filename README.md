@@ -1,0 +1,58 @@
+# The Bridge — Website
+
+Node/Express build of **Design A — Corporate Clarity** from the Claude Design canvas "The Bridge — Website Samples".
+
+## Run locally
+
+```bash
+npm install
+cp .env.example .env   # then fill in SMTP details to email enquiries
+npm start              # or: npm run dev  (restarts on file changes)
+```
+
+Open http://localhost:3000
+
+## Pages
+
+| URL | Content |
+| --- | --- |
+| `/` | Hero, organisations supported, the workforce challenge, services overview, process, why partner, enquiry form |
+| `/services` | The three services in detail, business-partner extras, proposal call to action |
+| `/about` | Who we are, why partner with us, process, industries |
+| `/contact` | Contact details, what happens next, enquiry form (`/contact?service=recruitment` pre-selects a service) |
+| `/privacy` | Privacy policy covering the enquiry form |
+| `/sitemap.xml`, `/robots.txt` | For search engines |
+
+## Editing content
+
+All text, services, clients, industries and contact details are in **`site.js`**. Add client names to `clients` as they agree to be listed.
+
+- **Team:** members are listed under `team` and shown in “Meet the team” on the About page. Fill in `name` and an optional `bio`; a member with only a `role` is shown by role.
+- **Company registration:** RC number and registration details are under `registration`. The certificate itself is deliberately not published on the site.
+
+## Enquiry form
+
+Posts to `/contact`. With `SMTP_HOST` set, each enquiry is emailed to `MAIL_TO` with the enquirer as reply-to; without it, enquiries are printed to the server console. It has validation on both browser and server, a hidden spam trap, and a limit of 5 enquiries per visitor per 15 minutes. It also works with JavaScript switched off.
+
+## Animations
+
+Page heroes animate in on load; sections, cards and process steps fade up as they scroll into view; photos zoom gently on hover. Animations switch off automatically for visitors who have reduced motion enabled, and all content stays visible if JavaScript is unavailable. Styles are in the “Motion” block at the end of `styles.css`.
+
+## Going live
+
+1. Set `NODE_ENV=production`, `SITE_URL` (e.g. `https://thebridge.example`) and the SMTP values on the host.
+2. Run `npm install --omit=dev && npm start` behind HTTPS (Render, Railway, a VPS with Nginx, etc.).
+3. Have the client review `/privacy` before launch.
+
+## Structure
+
+```
+server.js                Express app: routes, security headers, enquiry handling
+site.js                  All site copy and contact details
+views/                   EJS templates (pages + partials/)
+public/css/styles.css    Styles; design tokens at the top
+public/js/main.js        Mobile menu, header shadow, scroll animations, form validation and submission
+public/js/motion-flag.js Turns animations on before first paint (skipped for reduced-motion users)
+public/fonts/            Self-hosted Montserrat and DM Sans (SIL Open Font License)
+public/images/           Logos, icons and photography from the design
+```

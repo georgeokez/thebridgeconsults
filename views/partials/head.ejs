@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %></title>
+  <meta name="description" content="<%= description %>">
+  <% if (canonical) { %><link rel="canonical" href="<%= canonical %>"><% } %>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="<%= site.name %>">
+  <meta property="og:title" content="<%= title %>">
+  <meta property="og:description" content="<%= description %>">
+  <% if (siteUrl) { %><meta property="og:url" content="<%= canonical %>">
+  <meta property="og:image" content="<%= siteUrl %>/images/handshake.jpg"><% } %>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#2e3560">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png">
+  <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+  <link rel="preload" href="/fonts/montserrat-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/dm-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <script src="/js/motion-flag.js"></script>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script type="application/ld+json"><%- JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'ProfessionalService',
+    name: site.brandName,
+    legalName: site.legalName,
+    identifier: { '@type': 'PropertyValue', propertyID: 'CAC RC Number', value: site.registration.rcNumber },
+    description: site.description,
+    email: site.email,
+    telephone: site.phoneHref.replace('tel:', ''),
+    url: siteUrl || undefined,
+    logo: siteUrl ? siteUrl + '/images/logo.png' : undefined,
+    sameAs: site.social.map(function (s) { return s.url; })
+  }).replace(/</g, '\\u003c') %></script>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<div class="topbar">
+  <div class="container topbar-inner">
+    <div class="topbar-group">
+      <a href="mailto:<%= site.email %>"><%= site.email %></a>
+      <a href="<%= site.phoneHref %>"><%= site.phone %></a>
+    </div>
+    <div class="topbar-group topbar-social">
+      <a href="/about#credentials" class="topbar-rc">CAC registered · RC <%= site.registration.rcNumber %></a>
+      <% site.social.forEach(function (s) { %><a href="<%= s.url %>" target="_blank" rel="noopener noreferrer"><%= s.label %></a><% }) %>
+    </div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="brand" aria-label="The Bridge Consults — home">
+      <img src="/images/logo.png" alt="The Bridge Consults" width="100" height="64">
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="bar" aria-hidden="true"></span><span class="bar" aria-hidden="true"></span><span class="bar" aria-hidden="true"></span><span class="sr-only">Open menu</span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <% [['home', '/', 'Home'], ['about', '/about', 'About'], ['services', '/services', 'Services'], ['contact', '/contact', 'Contact']].forEach(function (l) { %>
+        <a href="<%= l[1] %>"<%- page === l[0] ? ' class="active" aria-current="page"' : '' %>><%= l[2] %></a>
+      <% }) %>
+      <a href="/contact" class="btn btn-primary btn-sm nav-cta">Book a consultation</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
