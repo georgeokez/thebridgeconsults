@@ -29,6 +29,7 @@
         <h2 class="footer-title">Get in touch</h2>
         <ul class="footer-list">
           <li><a href="mailto:<%= site.email %>"><%= site.email %></a></li>
+          <% if (site.emailAlt) { %><li><a href="mailto:<%= site.emailAlt %>"><%= site.emailAlt %></a></li><% } %>
           <li><a href="<%= site.phoneHref %>"><%= site.phone %></a></li>
           <li><a href="/contact">Book a consultation</a></li>
         </ul>

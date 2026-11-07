@@ -9,7 +9,8 @@ module.exports = {
   description:
     'The Bridge is a recruitment, HR outsourcing and business partner firm for organisations that need workforce solutions to work, not just look good on paper.',
 
-  email: 'thebridgerecruiter@gmail.com',
+  email: 'info@thebridgeconsults.com',
+  emailAlt: 'thebridgerecruiter@gmail.com', // shown as an additional address in the footer
   phone: '0802 543 5028',
   phoneHref: 'tel:+2348025435028',
 
@@ -103,7 +104,7 @@ module.exports = {
     'Workforce Planning',
     'Performance Management Systems',
     'Employee Relations',
-    'Organizational Development',
+    'Organisational Development',
     'HR Policy Design Support',
     'Change Management',
   ],
@@ -135,7 +136,7 @@ module.exports = {
     'Logistics',
     'FMCG & Retail',
     'Corporate Organisations',
-    'Startups & SMEs',
+    'Start-ups & SMEs',
   ],
 
   // Options for "What do you need help with?" on the enquiry form.

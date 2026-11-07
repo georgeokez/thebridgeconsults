@@ -210,12 +210,12 @@
           setStatus('Thank you, your enquiry has been sent. We’ll be in touch shortly.', 'ok');
         } else {
           if (res.errors) Object.keys(res.errors).forEach(function (n) { setFieldError(n, res.errors[n]); });
-          setStatus(res.error || 'Sorry, we couldn’t send your enquiry. Please email thebridgerecruiter@gmail.com.', 'err');
+          setStatus(res.error || 'Sorry, we couldn’t send your enquiry. Please email info@thebridgeconsults.com.', 'err');
         }
         status.focus();
       })
       .catch(function () {
-        setStatus('Sorry, we couldn’t send your enquiry. Please check your connection or email thebridgerecruiter@gmail.com.', 'err');
+        setStatus('Sorry, we couldn’t send your enquiry. Please check your connection or email info@thebridgeconsults.com.', 'err');
       })
       .then(function () {
         button.disabled = false;

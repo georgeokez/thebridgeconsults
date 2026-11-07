@@ -456,3 +456,6 @@ html:not(.motion) .marquee-group .client-name::after { display: none; }
   .process li:hover strong { color: var(--blue); }
 }
 @media (max-width: 640px) { .process li::after { inset: -12px -12px -14px; } }
+
+/* Keep the floating back-to-top button clear of the footer links */
+@media (max-width: 1340px) { .footer-bottom { padding-right: 72px; } }
