@@ -21,14 +21,35 @@ module.exports = {
     act: 'Companies and Allied Matters Act 2020',
   },
 
-  // Team members shown in "Meet the team" on the About page.
-  // A member is shown once `name` or `role` is filled in; `name` and `bio` are optional.
+  // Team members shown in "Meet the team" on the About page, in this order.
+  // Rows alternate automatically: photo on the left, then on the right, and so on.
+  // `bio` is a list of paragraphs (aim for 150 to 165 words in total).
   team: [
     {
-      name: '',
-      role: 'Digital Marketer',
-      bio: '',
+      name: 'Ngozi I. Onuora',
+      credentials: 'AIPMN, SPHR, SHRM-SCP',
+      role: 'Board Member',
+      focus: 'HR, People Strategy & Organisational Development',
+      bio: [
+        'Ngozi brings more than 25 years of experience in human resources, people strategy, organisational development, training and business operations. She has worked with organisations across Africa, helping them attract, develop and retain talent, build high-performing teams and strengthen workplace culture in healthcare, financial services, professional services and other sectors.',
+        'Her career includes senior leadership roles as Chief People Officer, Chief Human Resources Officer, Global Vice-President of People & Culture, Chief Operations Officer and General Manager, Human Resources & Corporate Services. She has led major recruitment, learning and development, change management and transformation programmes across several countries.',
+        'She holds the SPHR® and SHRM-SCP certifications and a Bachelor’s degree in Chemistry from the University of Jos. She believes trust, clarity, continuous development and genuine care for people are what make workplaces thrive.',
+        'As a Board Member, Ngozi provides strategic oversight and senior expertise across people strategy, talent management, training, organisational development and leadership.',
+      ],
       photo: { src: '/images/team-1.jpg', w: 800, h: 800 },
+    },
+    {
+      name: 'Pius Ihimekpen',
+      credentials: '',
+      role: 'Board Member',
+      focus: 'Healthcare Leadership, Strategy & Executive Coaching',
+      bio: [
+        'Pius is a C-suite executive with more than two decades of strategic and operational leadership across the healthcare sector, in both local and international markets. He spent nine and a half years in the pharmaceutical industry, rising to Country Product Manager, before moving into in-vitro and imaging diagnostics, where he held senior roles including Country Sales and Marketing Director for global multinationals.',
+        'He is currently Strategic Country Business Head (IVD) at Crown Healthcare, a leading provider of integrated healthcare and diagnostic solutions across Africa. He is also Lead Consultant and Managing Partner at CareVille Consulting Services, where he provides strategic advisory and executive coaching.',
+        'Pius is an Executive Member of the National Institute of Marketing of Nigeria, a Fellow of the African Institute of Strategic Managers and of the Institute of Professional Managers and Administrators of Nigeria, and a Certified Management Professional (CMP-UK).',
+        'As a Board Member, he brings visionary leadership, mentoring and a deep commitment to developing people.',
+      ],
+      photo: { src: '/images/team-2.jpg', w: 900, h: 900 },
     },
   ],
 

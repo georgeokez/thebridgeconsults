@@ -27,7 +27,7 @@ Open http://localhost:3000
 
 All text, services, clients, industries and contact details are in **`site.js`**. Add client names to `clients` as they agree to be listed.
 
-- **Team:** members are listed under `team` and shown in “Meet the team” on the About page. Fill in `name` and an optional `bio`; a member with only a `role` is shown by role.
+- **Team:** members are listed under `team` and shown in “Meet the team” on the About page, in that order. Each needs `name`, `role`, `focus`, a `bio` (a list of paragraphs, 150 to 165 words in total) and a square `photo` in `public/images/`; `credentials` is optional. Rows alternate automatically, photo left then photo right; on phones the photo sits above the profile.
 - **Company registration:** RC number and registration details are under `registration`. The certificate itself is deliberately not published on the site.
 
 ## Enquiry form

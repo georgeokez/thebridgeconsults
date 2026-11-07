@@ -311,13 +311,6 @@ h1, h2, h3, h4, h5 { margin: 0; font-family: var(--head); color: var(--navy); }
 .trust-line:hover span { text-decoration: underline; }
 .topbar-rc { font-weight: 500; }
 
-/* ---------- Team ---------- */
-.team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 28px; }
-.team-card { display: flex; flex-direction: column; background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
-.team-photo { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 0; }
-.team-body { display: flex; flex-direction: column; gap: 6px; padding: 22px 24px 26px; }
-.team-role { font-family: var(--head); font-weight: 600; font-size: 15px; color: var(--blue); }
-
 /* ---------- Credentials (about) ---------- */
 .credentials { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(440px, 100%), 1fr)); gap: 56px; align-items: center; }
 .cert-badge { display: flex; align-items: center; gap: 16px; align-self: flex-start; margin-top: 6px; padding: 16px 20px; background: #fff; border: 1px solid var(--line-card); border-left: 3px solid var(--blue); border-radius: var(--radius); box-shadow: var(--shadow); }
@@ -325,16 +318,6 @@ h1, h2, h3, h4, h5 { margin: 0; font-family: var(--head); color: var(--navy); }
 .cert-badge div { display: flex; flex-direction: column; gap: 2px; }
 .cert-badge strong { font-family: var(--head); color: var(--navy); }
 .cert-badge span { font-size: 14px; color: var(--text-muted); }
-.team-single { grid-template-columns: 1fr; }
-.team-single .team-card { flex-direction: row; max-width: 920px; }
-.team-single .team-photo { width: 340px; flex: none; }
-.team-single .team-body { justify-content: center; padding: 36px 40px; gap: 10px; }
-.team-single .team-body .h3 { font-size: 26px; }
-@media (max-width: 720px) {
-  .team-single .team-card { flex-direction: column; }
-  .team-single .team-photo { width: 100%; }
-  .team-single .team-body { padding: 22px 24px 26px; }
-}
 
 /* =========================================================
    Motion
@@ -379,10 +362,6 @@ h1, h2, h3, h4, h5 { margin: 0; font-family: var(--head); color: var(--navy); }
 .photo-zoom { overflow: hidden; border-radius: var(--radius); }
 .photo-zoom .photo { border-radius: 0; transition: transform .8s cubic-bezier(.2, .7, .2, 1); }
 .photo-zoom:hover .photo { transform: scale(1.04); }
-.team-card { transition: box-shadow .25s ease, transform .25s ease; }
-.team-card .team-photo { transition: transform .8s cubic-bezier(.2, .7, .2, 1); }
-.team-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
-.team-card:hover .team-photo { transform: scale(1.03); }
 
 /* Buttons and chips */
 .btn-primary:hover, .btn-white:hover { transform: translateY(-1px); }
@@ -400,7 +379,7 @@ h1, h2, h3, h4, h5 { margin: 0; font-family: var(--head); color: var(--navy); }
 
 @media (prefers-reduced-motion: reduce) {
   .page-hero::before, .cta-band::before { animation: none !important; }
-  .photo-zoom:hover .photo, .team-card:hover .team-photo { transform: none; }
+  .photo-zoom:hover .photo, .team-figure:hover .team-portrait { transform: none; }
 }
 
 @media print { .reveal { opacity: 1 !important; transform: none !important; } }
@@ -459,3 +438,30 @@ html:not(.motion) .marquee-group .client-name::after { display: none; }
 
 /* Keep the floating back-to-top button clear of the footer links */
 @media (max-width: 1340px) { .footer-bottom { padding-right: 72px; } }
+
+/* ---------- Team (about): alternating photo and profile rows ---------- */
+.team-list { display: flex; flex-direction: column; gap: 80px; }
+.team-member { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px; align-items: center; }
+.team-figure { position: relative; isolation: isolate; }
+.team-figure::before { content: ''; position: absolute; z-index: -1; inset: 18px -18px -18px 18px; border-radius: 14px; background: linear-gradient(135deg, var(--blue), var(--cyan)); opacity: .9; }
+.team-figure { border-radius: 14px; }
+.team-portrait { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 14px; box-shadow: var(--shadow-hover); background: #fff; transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
+.team-figure:hover .team-portrait { transform: translate(-4px, -4px); }
+.team-info { display: flex; flex-direction: column; gap: 10px; }
+.team-role { font-family: var(--head); font-weight: 700; font-size: 14px; letter-spacing: .14em; text-transform: uppercase; color: var(--blue); }
+.team-name { font-family: var(--head); font-weight: 800; font-size: clamp(1.6rem, 2.6vw, 2.1rem); line-height: 1.2; color: var(--navy); }
+.team-credentials { display: inline-block; font-size: .5em; font-weight: 600; letter-spacing: .04em; color: var(--text-soft); vertical-align: middle; }
+.team-focus { font-family: var(--head); font-weight: 600; color: var(--text-body); padding-bottom: 14px; border-bottom: 2px solid var(--line-chip); margin-bottom: 4px; }
+.team-bio { display: flex; flex-direction: column; gap: 12px; color: var(--text-muted); font-size: 16px; line-height: 1.7; }
+.team-bio p { margin: 0; }
+@media (min-width: 900px) {
+  .team-member-reverse { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+  .team-member-reverse .team-figure { order: 2; }
+  .team-member-reverse .team-figure::before { inset: 18px 18px -18px -18px; }
+  .team-member-reverse .team-figure:hover .team-portrait { transform: translate(4px, -4px); }
+}
+@media (max-width: 899px) {
+  .team-member { grid-template-columns: 1fr; gap: 40px; }
+  .team-figure { max-width: 420px; width: calc(100% - 18px); }
+  .team-list { gap: 64px; }
+}

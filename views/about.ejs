@@ -1,5 +1,5 @@
 <%- include('partials/head') %>
-<% var team = site.team.filter(function (m) { return m.name || m.role; }); var flip = team.length > 0; %>
+<% var team = site.team.filter(function (m) { return m.name; }); var flip = team.length > 0; %>
 
 <section class="page-hero bg-navy">
   <div class="container stack">
@@ -28,18 +28,19 @@
       <p class="eyebrow">Meet the team</p>
       <h2 class="h2">The people behind The Bridge.</h2>
     </div>
-    <div class="team-grid<%= team.length === 1 && team[0].bio ? ' team-single' : '' %>">
-      <% team.forEach(function (m) { %>
-        <article class="team-card">
-          <img class="team-photo" src="<%= m.photo.src %>" alt="Portrait of <%= m.name || ('our ' + m.role) %>" width="<%= m.photo.w %>" height="<%= m.photo.h %>" loading="lazy">
-          <div class="team-body">
-            <% if (m.name) { %>
-              <h3 class="h3"><%= m.name %></h3>
-              <% if (m.role) { %><p class="team-role"><%= m.role %></p><% } %>
-            <% } else { %>
-              <h3 class="h3"><%= m.role %></h3>
-            <% } %>
-            <% if (m.bio) { %><p class="muted"><%= m.bio %></p><% } %>
+    <div class="team-list">
+      <% team.forEach(function (m, i) { %>
+        <article class="team-member<%= i % 2 === 1 ? ' team-member-reverse' : '' %>">
+          <div class="team-figure">
+            <img class="team-portrait" src="<%= m.photo.src %>" alt="Portrait of <%= m.name %>" width="<%= m.photo.w %>" height="<%= m.photo.h %>" loading="lazy">
+          </div>
+          <div class="team-info">
+            <p class="team-role"><%= m.role %></p>
+            <h3 class="team-name"><%= m.name %><% if (m.credentials) { %> <span class="team-credentials"><%= m.credentials %></span><% } %></h3>
+            <% if (m.focus) { %><p class="team-focus"><%= m.focus %></p><% } %>
+            <div class="team-bio">
+              <% (Array.isArray(m.bio) ? m.bio : [m.bio]).filter(Boolean).forEach(function (para) { %><p><%= para %></p><% }) %>
+            </div>
           </div>
         </article>
       <% }) %>
