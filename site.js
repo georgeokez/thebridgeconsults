@@ -51,6 +51,17 @@ module.exports = {
       ],
       photo: { src: '/images/team-2.jpg', w: 900, h: 900 },
     },
+    {
+      name: 'Ogonna Ajiba',
+      credentials: '',
+      role: 'Board Member',
+      focus: 'Oil & Gas Services and Manufacturing',
+      bio: [
+        'Ogonna Ajiba is a distinguished professional with more than 17 years of experience in the oil and gas services and manufacturing sectors. He brings a wealth of practical industry knowledge, strategic insight and a forward-looking perspective to driving business growth, operational excellence and sustainable value creation.',
+        'With a strong commitment to innovation and continuous improvement, Ogonna remains focused on delivering impactful solutions and advancing industry development.',
+      ],
+      photo: { src: '/images/team-3.jpg', w: 900, h: 900 },
+    },
   ],
 
   social: [
