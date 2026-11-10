@@ -11,7 +11,7 @@ module.exports = {
 
   email: 'info@thebridgeconsults.com',
   emailAlt: 'thebridgerecruiter@gmail.com', // shown as an additional address in the footer
-  phone: '0802 543 5028',
+  phone: '+234 802 543 5028',
   phoneHref: 'tel:+2348025435028',
 
   // Company registration (from the CAC Certificate of Incorporation)
