@@ -41,7 +41,7 @@
     </div>
     <div class="topbar-group topbar-social">
       <a href="/about#credentials" class="topbar-rc">CAC registered · RC <%= site.registration.rcNumber %></a>
-      <% site.social.forEach(function (s) { %><a href="<%= s.url %>" target="_blank" rel="noopener noreferrer"><%= s.label %></a><% }) %>
+      <%- include('social-icons', { cls: 'social-icons-top' }) %>
     </div>
   </div>
 </div>

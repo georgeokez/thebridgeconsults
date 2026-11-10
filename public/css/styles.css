@@ -113,7 +113,7 @@ h1, h2, h3, h4, h5 { margin: 0; font-family: var(--head); color: var(--navy); }
 /* ---------- Top bar ---------- */
 .topbar { background: var(--navy); color: #dfe5f5; font-size: 14px; }
 .topbar-inner { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 4px 28px; padding-top: 9px; padding-bottom: 9px; }
-.topbar-group { display: flex; flex-wrap: wrap; gap: 4px 24px; }
+.topbar-group { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 24px; }
 .topbar a { color: #dfe5f5; text-decoration: none; }
 .topbar a:hover { color: #fff; text-decoration: underline; }
 
@@ -538,3 +538,18 @@ picture { display: contents; }
   .faq details p { padding: 0 18px 18px; }
   .insight-card { padding: 22px; }
 }
+
+/* Social icons */
+.social-icons { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.social-icons a { display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; transition: background-color .2s ease, color .2s ease, border-color .2s ease, transform .2s ease; }
+.social-icons a:hover { transform: translateY(-2px); }
+.social-icons svg { display: block; }
+.topbar .social-icons { gap: 4px; }
+.topbar .social-icons a { width: 28px; height: 28px; color: #dfe5f5; }
+.topbar .social-icons a:hover { color: #fff; background: rgba(255,255,255,.12); text-decoration: none; }
+.topbar .social-icons svg { width: 16px; height: 16px; }
+.footer-social .social-icons a { width: 40px; height: 40px; padding: 0; color: #fff; background: rgba(255,255,255,.08); border: 1px solid rgba(140,196,240,.35); }
+.footer-social .social-icons a:hover { color: #fff; background: var(--blue); border-color: var(--blue); }
+.contact-details .contact-social .social-icons a { width: 42px; height: 42px; padding: 0; color: var(--blue); border: 1px solid var(--line-card); background: #fff; }
+.contact-details .contact-social .social-icons a:hover { color: #fff; background: var(--blue); border-color: var(--blue); }
+.social-icons a:focus-visible { outline: 3px solid var(--cyan); outline-offset: 2px; }

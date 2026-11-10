@@ -7,7 +7,7 @@
         <img src="/images/logo-white.png" alt="The Bridge Consults" width="110" height="70">
         <p>Recruitment and HR solutions. <%= site.tagline %></p>
         <div class="footer-social">
-          <% site.social.forEach(function (s) { %><a href="<%= s.url %>" target="_blank" rel="noopener noreferrer"><%= s.label %></a><% }) %>
+          <%- include('social-icons', { cls: 'social-icons-foot' }) %>
         </div>
       </div>
       <div>

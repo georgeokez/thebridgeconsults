@@ -80,9 +80,9 @@ module.exports = {
   ],
 
   social: [
-    { label: 'Instagram', url: 'https://www.instagram.com/thebridgeconsults_' },
-    { label: 'LinkedIn', url: 'https://www.linkedin.com/company/136015830' },
-    { label: 'Facebook', url: 'https://www.facebook.com/profile.php?id=61593121294521' },
+    { label: 'Instagram', icon: 'instagram', url: 'https://www.instagram.com/thebridgeconsults_' },
+    { label: 'LinkedIn', icon: 'linkedin', url: 'https://www.linkedin.com/company/136015830' },
+    { label: 'Facebook', icon: 'facebook', url: 'https://www.facebook.com/profile.php?id=61593121294521' },
   ],
 
   // Organisations shown in the "supported" strip. Add more as clients agree to be listed.

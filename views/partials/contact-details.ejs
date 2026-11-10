@@ -10,7 +10,7 @@
   <div>
     <dt>Social</dt>
     <dd class="contact-social">
-      <% site.social.forEach(function (s) { %><a href="<%= s.url %>" target="_blank" rel="noopener noreferrer"><%= s.label %></a><% }) %>
+      <%- include('social-icons', { cls: 'social-icons-contact' }) %>
     </dd>
   </div>
 </dl>
