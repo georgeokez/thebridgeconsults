@@ -6,6 +6,8 @@ const helmet = require('helmet');
 const compression = require('compression');
 const nodemailer = require('nodemailer');
 const site = require('./site');
+const serviceDetails = require('./content/services');
+const insights = require('./content/insights');
 
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;
@@ -48,16 +50,113 @@ app.use(
 app.locals.site = site;
 app.locals.siteUrl = SITE_URL;
 app.locals.year = new Date().getFullYear();
+app.locals.insights = insights;
+// WebP version of a photo (generated alongside each .jpg in public/images)
+app.locals.webp = (src) => src.replace(/\.(jpe?g|png)$/i, '.webp');
+// "2026-11-10" -> "10 November 2026"
+app.locals.formatDate = (iso) =>
+  new Date(iso + 'T12:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+
+const BRAND = site.brandName; // used in page titles
+
+// ---------- Structured data (schema.org) for search engines ----------
+function baseUrl(req) {
+  return SITE_URL || `${req.protocol}://${req.get('host')}`;
+}
+
+function organisationNode(base) {
+  return {
+    '@type': 'ProfessionalService',
+    '@id': `${base}/#organization`,
+    name: site.brandName,
+    alternateName: [site.name, site.legalName],
+    legalName: site.legalName,
+    url: `${base}/`,
+    logo: `${base}/images/logo.png`,
+    image: `${base}/images/og-image.jpg`,
+    description: site.description,
+    slogan: site.tagline,
+    email: site.email,
+    telephone: site.phoneHref.replace('tel:', ''),
+    address: { '@type': 'PostalAddress', addressCountry: site.seo.countryCode },
+    areaServed: site.seo.areaServed,
+    identifier: { '@type': 'PropertyValue', propertyID: 'CAC RC Number', value: site.registration.rcNumber },
+    knowsAbout: site.seo.topics,
+    sameAs: site.social.map((s) => s.url),
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Recruitment and HR services',
+      itemListElement: site.services.map((s) => ({
+        '@type': 'Offer',
+        itemOffered: { '@type': 'Service', name: s.name, url: `${base}/services/${s.key}` },
+      })),
+    },
+  };
+}
+
+function buildSchema(req, res, { type = 'WebPage', breadcrumb, extra = [] } = {}) {
+  const base = baseUrl(req);
+  const url = base + (req.path === '/' ? '/' : req.path);
+  const graph = [
+    organisationNode(base),
+    {
+      '@type': 'WebSite',
+      '@id': `${base}/#website`,
+      url: `${base}/`,
+      name: site.brandName,
+      inLanguage: 'en-GB',
+      publisher: { '@id': `${base}/#organization` },
+    },
+    {
+      '@type': type,
+      '@id': `${url}#webpage`,
+      url,
+      name: res.locals.title,
+      description: res.locals.description,
+      inLanguage: 'en-GB',
+      isPartOf: { '@id': `${base}/#website` },
+      about: { '@id': `${base}/#organization` },
+      ...(breadcrumb ? { breadcrumb: { '@id': `${url}#breadcrumb` } } : {}),
+    },
+  ];
+  if (breadcrumb) {
+    graph.push({
+      '@type': 'BreadcrumbList',
+      '@id': `${url}#breadcrumb`,
+      itemListElement: breadcrumb.map((b, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: b.name,
+        ...(b.path ? { item: base + b.path } : {}),
+      })),
+    });
+  }
+  return graph.concat(extra.map((fn) => (typeof fn === 'function' ? fn(base, url) : fn)));
+}
 
 // Defaults available to every template
 app.use((req, res, next) => {
+  const base = baseUrl(req);
   res.locals.path = req.path;
   res.locals.page = '';
   res.locals.description = site.description;
   res.locals.canonical = SITE_URL ? SITE_URL + (req.path === '/' ? '/' : req.path) : '';
+  res.locals.absoluteBase = base;
+  res.locals.ogImage = `${base}/images/og-image.jpg`;
+  res.locals.ogType = 'website';
+  res.locals.noindex = false;
+  res.locals.breadcrumb = null;
+  res.locals.schema = null;
   res.locals.form = { values: {}, status: '', message: '' };
   next();
 });
+
+// Render a page with its title/description, then attach structured data
+function renderPage(req, res, view, locals, schemaOpts) {
+  Object.assign(res.locals, locals);
+  res.locals.schema = buildSchema(req, res, schemaOpts);
+  res.render(view);
+}
 
 // ---------- Pages ----------
 function formStateFromQuery(req) {
@@ -73,40 +172,182 @@ function formStateFromQuery(req) {
 }
 
 app.get('/', (req, res) => {
-  res.render('home', {
+  renderPage(req, res, 'home', {
     page: 'home',
-    title: `${site.name} | Recruitment & HR Solutions`,
+    title: `Recruitment & HR Consultancy in Nigeria & Africa | ${BRAND}`,
+    description:
+      'Nigeria-based recruitment, HR outsourcing and staff training firm helping organisations across Africa and worldwide hire the right people and build strong teams.',
     form: formStateFromQuery(req),
   });
 });
 
 app.get('/services', (req, res) => {
-  res.render('services', {
-    page: 'services',
-    title: `Services | ${site.name}`,
-    description: 'Recruitment, HR outsourcing and business partner support, and staff training and development from The Bridge.',
-  });
+  renderPage(
+    req,
+    res,
+    'services',
+    {
+      page: 'services',
+      title: `Recruitment, HR Outsourcing & Training Services | ${BRAND}`,
+      description:
+        'Recruitment, HR outsourcing, HR business partner support and staff training for organisations in Nigeria, across Africa and internationally, from The Bridge Consults.',
+      breadcrumb: [{ name: 'Home', path: '/' }, { name: 'Services' }],
+    },
+    { type: 'CollectionPage', breadcrumb: [{ name: 'Home', path: '/' }, { name: 'Services' }] }
+  );
+});
+
+app.get('/services/:key', (req, res, next) => {
+  const service = site.services.find((s) => s.key === req.params.key);
+  const detail = serviceDetails[req.params.key];
+  if (!service || !detail) return next();
+  const crumbs = [{ name: 'Home', path: '/' }, { name: 'Services', path: '/services' }, { name: service.name }];
+  renderPage(
+    req,
+    res,
+    'service',
+    {
+      page: 'services',
+      title: detail.seoTitle,
+      description: detail.metaDescription,
+      service,
+      detail,
+      related: site.services.filter((s) => s.key !== service.key),
+      breadcrumb: crumbs,
+    },
+    {
+      breadcrumb: crumbs,
+      extra: [
+        (base, url) => ({
+          '@type': 'Service',
+          '@id': `${url}#service`,
+          name: service.name,
+          serviceType: service.name,
+          description: detail.metaDescription,
+          url,
+          provider: { '@id': `${base}/#organization` },
+          areaServed: site.seo.areaServed,
+        }),
+        (base, url) => ({
+          '@type': 'FAQPage',
+          '@id': `${url}#faq`,
+          mainEntity: detail.faqs.map((f) => ({
+            '@type': 'Question',
+            name: f.q,
+            acceptedAnswer: { '@type': 'Answer', text: f.a },
+          })),
+        }),
+      ],
+    }
+  );
 });
 
 app.get('/about', (req, res) => {
-  res.render('about', {
-    page: 'about',
-    title: `About | ${site.name}`,
-    description: 'The Bridge is a recruitment, HR support and business partner firm built for organisations that need workforce solutions to work.',
-  });
+  const crumbs = [{ name: 'Home', path: '/' }, { name: 'About' }];
+  renderPage(
+    req,
+    res,
+    'about',
+    {
+      page: 'about',
+      title: `About Us | ${BRAND}, Recruitment & HR Partner in Africa`,
+      description:
+        'Meet The Bridge Consults, a Nigeria-based recruitment, HR support and business partner firm working with organisations across Africa and internationally.',
+    },
+    {
+      type: 'AboutPage',
+      breadcrumb: crumbs,
+      extra: site.team
+        .filter((m) => m.name)
+        .map((m) => (base) => ({
+          '@type': 'Person',
+          name: m.name,
+          jobTitle: m.role,
+          image: base + m.photo.src,
+          worksFor: { '@id': `${base}/#organization` },
+        })),
+    }
+  );
+});
+
+app.get('/insights', (req, res) => {
+  const crumbs = [{ name: 'Home', path: '/' }, { name: 'Insights' }];
+  renderPage(
+    req,
+    res,
+    'insights',
+    {
+      page: 'insights',
+      title: `HR & Hiring Insights | ${BRAND}`,
+      description:
+        'Practical guidance on recruitment, onboarding and HR for organisations in Nigeria, across Africa and around the world, from The Bridge Consults.',
+      breadcrumb: crumbs,
+    },
+    { type: 'CollectionPage', breadcrumb: crumbs }
+  );
+});
+
+app.get('/insights/:slug', (req, res, next) => {
+  const article = insights.find((a) => a.slug === req.params.slug);
+  if (!article) return next();
+  const crumbs = [{ name: 'Home', path: '/' }, { name: 'Insights', path: '/insights' }, { name: article.title }];
+  renderPage(
+    req,
+    res,
+    'article',
+    {
+      page: 'insights',
+      title: `${article.title} | ${BRAND}`,
+      description: article.description,
+      ogType: 'article',
+      article,
+      relatedService: site.services.find((s) => s.key === article.service),
+      breadcrumb: crumbs,
+    },
+    {
+      breadcrumb: crumbs,
+      extra: [
+        (base, url) => ({
+          '@type': 'Article',
+          '@id': `${url}#article`,
+          headline: article.title,
+          description: article.description,
+          datePublished: article.date,
+          dateModified: article.updated || article.date,
+          inLanguage: 'en-GB',
+          image: `${base}/images/og-image.jpg`,
+          mainEntityOfPage: { '@id': `${url}#webpage` },
+          author: { '@id': `${base}/#organization` },
+          publisher: { '@id': `${base}/#organization` },
+        }),
+      ],
+    }
+  );
 });
 
 app.get('/contact', (req, res) => {
-  res.render('contact', {
-    page: 'contact',
-    title: `Contact | ${site.name}`,
-    description: 'Book a consultation with The Bridge. Tell us what you need and we’ll come back with a proposal.',
-    form: formStateFromQuery(req),
-  });
+  const crumbs = [{ name: 'Home', path: '/' }, { name: 'Contact' }];
+  renderPage(
+    req,
+    res,
+    'contact',
+    {
+      page: 'contact',
+      title: `Contact Us | ${BRAND}`,
+      description:
+        'Book a consultation with The Bridge Consults, a recruitment and HR firm based in Nigeria and working across Africa and internationally. Tell us what you need.',
+      form: formStateFromQuery(req),
+    },
+    { type: 'ContactPage', breadcrumb: crumbs }
+  );
 });
 
 app.get('/privacy', (req, res) => {
-  res.render('privacy', { page: 'privacy', title: `Privacy policy | ${site.name}` });
+  renderPage(req, res, 'privacy', {
+    page: 'privacy',
+    title: `Privacy Policy | ${BRAND}`,
+    description: 'How The Bridge Consults handles the information you share with us through this website.',
+  });
 });
 
 app.get('/robots.txt', (req, res) => {
@@ -114,9 +355,19 @@ app.get('/robots.txt', (req, res) => {
 });
 
 app.get('/sitemap.xml', (req, res) => {
-  const base = SITE_URL || `${req.protocol}://${req.get('host')}`;
-  const urls = ['/', '/services', '/about', '/contact', '/privacy']
-    .map((u) => `  <url><loc>${base}${u}</loc></url>`)
+  const base = baseUrl(req);
+  const pages = [
+    { path: '/', lastmod: site.updated },
+    { path: '/services', lastmod: site.updated },
+    ...site.services.map((s) => ({ path: `/services/${s.key}`, lastmod: site.updated })),
+    { path: '/about', lastmod: site.updated },
+    { path: '/insights', lastmod: insights.length ? insights[0].date : site.updated },
+    ...insights.map((a) => ({ path: `/insights/${a.slug}`, lastmod: a.updated || a.date })),
+    { path: '/contact', lastmod: site.updated },
+    { path: '/privacy', lastmod: site.updated },
+  ];
+  const urls = pages
+    .map((p) => `  <url><loc>${base}${p.path}</loc><lastmod>${p.lastmod}</lastmod></url>`)
     .join('\n');
   res.type('application/xml').send(`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`);
 });
@@ -222,8 +473,9 @@ app.post('/contact', async (req, res) => {
 
 // ---------- Errors ----------
 app.use((req, res) => {
+  res.locals.noindex = true;
   res.status(404).render('error', {
-    title: `Page not found | ${site.name}`,
+    title: `Page not found | ${BRAND}`,
     code: '404',
     heading: 'We couldn’t find that page.',
     text: 'The page you’re looking for may have moved or no longer exists.',
@@ -234,8 +486,9 @@ app.use((req, res) => {
 app.use((err, req, res, next) => {
   console.error(err);
   if (res.headersSent) return;
+  res.locals.noindex = true;
   res.status(err.status || 500).render('error', {
-    title: `Something went wrong | ${site.name}`,
+    title: `Something went wrong | ${BRAND}`,
     code: String(err.status || 500),
     heading: 'Something went wrong.',
     text: 'Please try again in a moment.',

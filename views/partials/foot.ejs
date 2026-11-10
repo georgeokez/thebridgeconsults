@@ -16,13 +16,14 @@
           <li><a href="/">Home</a></li>
           <li><a href="/about">About</a></li>
           <li><a href="/services">Services</a></li>
+          <li><a href="/insights">Insights</a></li>
           <li><a href="/contact">Contact</a></li>
         </ul>
       </div>
       <div>
         <h2 class="footer-title">Services</h2>
         <ul class="footer-list">
-          <% site.services.forEach(function (s) { %><li><a href="/services#<%= s.key %>"><%= s.name %></a></li><% }) %>
+          <% site.services.forEach(function (s) { %><li><a href="/services/<%= s.key %>"><%= s.name %></a></li><% }) %>
         </ul>
       </div>
       <div>

@@ -64,7 +64,7 @@
     var root = document.documentElement;
     if (!root.classList.contains('motion') || !('IntersectionObserver' in window)) return;
 
-    var groups = ['.card-grid', '.service-grid', '.process', '.reasons', '.footer-grid'];
+    var groups = ['.card-grid', '.service-grid', '.process', '.reasons', '.insight-grid', '.faq', '.footer-grid'];
     var singles = ['.team-member', '.section-head', '.section-head-row', '.clients-inner', '.feature', '.panel', '.two-col > *',
       '.credentials > *', '.cta-inner', '.next-steps', '.prose'];
     var skip = '.hero, .page-hero';

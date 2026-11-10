@@ -1,0 +1,117 @@
+<%- include('partials/head') %>
+
+<section class="page-hero bg-navy">
+  <div class="container stack">
+    <%- include('partials/breadcrumb') %>
+    <p class="eyebrow eyebrow-light"><%= service.name %></p>
+    <h1 class="h1 measure-h"><%= detail.heading %></h1>
+    <p class="lead lead-light"><%= service.headline %> <%= service.intro %></p>
+    <div class="actions">
+      <a href="/contact?service=<%= service.key %>#enquiry" class="btn btn-white">Discuss your requirements</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container two-col two-col-center">
+    <div class="stack prose-plain">
+      <% detail.overview.forEach(function (para) { %><p class="lead-sm"><%= para %></p><% }) %>
+    </div>
+    <div class="photo-zoom"><%- include('partials/picture', { src: service.image.src, alt: service.image.alt, cls: 'photo photo-lg', w: service.image.w, h: service.image.h }) %></div>
+  </div>
+</section>
+
+<section class="section bg-tint">
+  <div class="container two-col">
+    <div class="stack">
+      <p class="eyebrow">What’s included</p>
+      <h2 class="h2"><%= detail.includedHeading %></h2>
+      <ul class="ticks ticks-lg">
+        <% service.points.forEach(function (p) { %><li><%= p %></li><% }) %>
+      </ul>
+      <% if (detail.showExtras) { %>
+        <div class="stack-sm extras">
+          <h3 class="h5">Also available as part of a business partner engagement</h3>
+          <ul class="chips">
+            <% site.partnerExtras.forEach(function (x) { %><li><%= x %></li><% }) %>
+          </ul>
+        </div>
+      <% } %>
+    </div>
+    <div class="why-panel">
+      <h2 class="h3"><%= detail.why.heading %></h2>
+      <% detail.why.body.forEach(function (para) { %><p><%= para %></p><% }) %>
+    </div>
+  </div>
+</section>
+
+<% if (detail.showProcess) { %>
+<section class="section">
+  <div class="container stack-lg">
+    <div class="section-head">
+      <p class="eyebrow">How we work</p>
+      <h2 class="h2">Our recruitment process, step by step.</h2>
+    </div>
+    <ol class="process">
+      <% site.process.forEach(function (p, i) { %>
+        <li>
+          <span class="process-num"><%= String(i + 1).padStart(2, '0') %></span>
+          <strong><%= p.title %></strong>
+          <span><%= p.body %></span>
+        </li>
+      <% }) %>
+    </ol>
+  </div>
+</section>
+<% } %>
+
+<section class="section<%= detail.showProcess ? ' bg-tint' : '' %>">
+  <div class="container two-col">
+    <div class="stack">
+      <p class="eyebrow">Industries we support</p>
+      <h2 class="h2-sm">Sector context that makes the difference.</h2>
+    </div>
+    <ul class="chips chips-lg">
+      <% site.industries.forEach(function (ind) { %><li><%= ind %></li><% }) %>
+    </ul>
+  </div>
+</section>
+
+<section class="section<%= detail.showProcess ? '' : ' bg-tint' %>">
+  <div class="container faq-wrap stack-lg">
+    <div class="section-head">
+      <p class="eyebrow">Questions</p>
+      <h2 class="h2">Frequently asked questions</h2>
+    </div>
+    <div class="faq">
+      <% detail.faqs.forEach(function (f) { %>
+        <details>
+          <summary><%= f.q %></summary>
+          <p><%= f.a %></p>
+        </details>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="section<%= detail.showProcess ? ' bg-tint' : '' %>">
+  <div class="container stack-lg">
+    <div class="section-head">
+      <p class="eyebrow">Related services</p>
+      <h2 class="h2-sm">One partner for hiring, HR and training.</h2>
+    </div>
+    <div class="service-grid service-grid-light">
+      <% related.forEach(function (s) { %>
+        <article class="service-card">
+          <h3 class="h3"><%= s.name %></h3>
+          <p><%= s.summary %></p>
+          <a href="/services/<%= s.key %>" class="link-arrow">Learn more <span class="sr-only">about <%= s.name %></span><span aria-hidden="true">→</span></a>
+        </article>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/cta', { heading: 'Pricing is tailored to each engagement.', text: 'After a needs assessment, we send a proposal that fits your objectives and requirements.', button: 'Request a proposal' }) %>
+
+<%- include('partials/foot') %>

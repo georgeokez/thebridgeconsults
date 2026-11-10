@@ -7,7 +7,22 @@ module.exports = {
   legalName: 'TheBridge Professional Services Limited',
   tagline: 'Connecting Talent. Building Businesses.',
   description:
-    'The Bridge is a recruitment, HR outsourcing and business partner firm for organisations that need workforce solutions to work, not just look good on paper.',
+    'The Bridge Consults is a Nigeria-based recruitment, HR outsourcing and business partner firm for organisations across Africa and worldwide that need workforce solutions to work, not just look good on paper.',
+
+  // Search engine settings
+  seo: {
+    country: 'Nigeria', // where the business is based
+    countryCode: 'NG',
+    reach: 'Nigeria, Africa and beyond', // where clients are served; used in page text
+    // Regions served, for search engines (structured data)
+    areaServed: [
+      { '@type': 'Country', name: 'Nigeria' },
+      { '@type': 'Continent', name: 'Africa' },
+      { '@type': 'Place', name: 'Worldwide' },
+    ],
+    topics: ['Recruitment', 'Talent acquisition', 'HR outsourcing', 'HR business partnering', 'HR policy', 'Staff training and development', 'Onboarding', 'Workforce planning'],
+  },
+  updated: '2026-11-10', // date shown to search engines in the sitemap; change when you update page content
 
   email: 'info@thebridgeconsults.com',
   emailAlt: 'thebridgerecruiter@gmail.com', // shown as an additional address in the footer

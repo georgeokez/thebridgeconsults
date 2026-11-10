@@ -17,7 +17,7 @@
       <p class="muted">The Bridge is a recruitment, HR support and business partner firm built for organisations that need workforce solutions to work. We combine structured hiring processes, HR outsourcing support and workforce development into a single, operationally aware partnership.</p>
       <p class="muted">We have supported organisations including <%= site.clients.join(' and ') %>, from successful recruitment projects to full HR business partner services covering talent acquisition, onboarding, employee relations, performance management and HR advisory.</p>
     </div>
-    <div class="photo-zoom"><img class="photo photo-lg" src="/images/puzzle.jpg" alt="Team members joining puzzle pieces together" width="574" height="395"></div>
+    <div class="photo-zoom"><%- include('partials/picture', { src: '/images/puzzle.jpg', alt: 'Team members joining puzzle pieces together', cls: 'photo photo-lg', w: 574, h: 395 }) %></div>
   </div>
 </section>
 
@@ -32,7 +32,7 @@
       <% team.forEach(function (m, i) { %>
         <article class="team-member<%= i % 2 === 1 ? ' team-member-reverse' : '' %>">
           <div class="team-figure">
-            <img class="team-portrait" src="<%= m.photo.src %>" alt="Portrait of <%= m.name %>" width="<%= m.photo.w %>" height="<%= m.photo.h %>" loading="lazy">
+            <%- include('partials/picture', { src: m.photo.src, alt: 'Portrait of ' + m.name + (m.role ? ', ' + m.role : ''), cls: 'team-portrait', w: m.photo.w, h: m.photo.h, loading: 'lazy' }) %>
           </div>
           <div class="team-info">
             <p class="team-role"><%= m.role %></p>

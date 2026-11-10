@@ -3,7 +3,7 @@
 <section class="hero bg-tint">
   <div class="container hero-grid">
     <div class="hero-copy">
-      <p class="eyebrow"><%= site.tagline %></p>
+      <p class="eyebrow">Recruitment &amp; HR consultancy · <%= site.seo.reach %></p>
       <h1 class="h1">Your people are your business.</h1>
       <p class="lead"><%= site.description %></p>
       <div class="actions">
@@ -15,7 +15,7 @@
         <span>Registered with the Corporate Affairs Commission · RC <%= site.registration.rcNumber %></span>
       </a>
     </div>
-    <img class="photo photo-hero" src="/images/handshake.jpg" alt="Two professionals shaking hands" width="1024" height="620" fetchpriority="high">
+    <%- include('partials/picture', { src: '/images/handshake.jpg', alt: 'Two professionals shaking hands', cls: 'photo photo-hero', w: 1024, h: 620, priority: true }) %>
   </div>
 </section>
 
@@ -72,7 +72,7 @@
           <span class="service-num"><%= String(i + 1).padStart(2, '0') %></span>
           <h3 class="h3"><%= s.name %></h3>
           <p><%= s.summary %></p>
-          <a href="/services#<%= s.key %>" class="link-arrow">Learn more <span class="sr-only">about <%= s.name %></span><span aria-hidden="true">→</span></a>
+          <a href="/services/<%= s.key %>" class="link-arrow">Learn more <span class="sr-only">about <%= s.name %></span><span aria-hidden="true">→</span></a>
         </article>
       <% }) %>
     </div>
@@ -102,7 +102,7 @@
     <div class="stack">
       <p class="eyebrow">Why partner with The Bridge</p>
       <h2 class="h2">Practical, modern and business-aware.</h2>
-      <div class="photo-zoom"><img class="photo photo-md" src="/images/puzzle.jpg" alt="Team members joining puzzle pieces together" width="574" height="395" loading="lazy"></div>
+      <div class="photo-zoom"><%- include('partials/picture', { src: '/images/puzzle.jpg', alt: 'Team members joining puzzle pieces together', cls: 'photo photo-md', w: 574, h: 395, loading: 'lazy' }) %></div>
       <div class="stack-sm">
         <h3 class="h5">Industries we support</h3>
         <ul class="chips">
@@ -121,7 +121,22 @@
   </div>
 </section>
 
-<section id="contact" class="section">
+<% if (insights.length) { %>
+<section class="section">
+  <div class="container stack-lg">
+    <div class="section-head-row">
+      <div class="section-head">
+        <p class="eyebrow">Insights</p>
+        <h2 class="h2">Practical guidance on hiring and HR.</h2>
+      </div>
+      <a href="/insights" class="link-arrow">All insights <span aria-hidden="true">→</span></a>
+    </div>
+    <%- include('partials/insight-cards', { items: insights.slice(0, 3) }) %>
+  </div>
+</section>
+<% } %>
+
+<section id="contact" class="section bg-tint">
   <div class="container two-col">
     <div class="stack contact-intro">
       <p class="eyebrow">Get in touch</p>

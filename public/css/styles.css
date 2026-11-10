@@ -465,3 +465,76 @@ html:not(.motion) .marquee-group .client-name::after { display: none; }
   .team-figure { max-width: 420px; width: calc(100% - 18px); }
   .team-list { gap: 64px; }
 }
+
+/* =========================================================
+   Service pages, Insights and shared bits (SEO update)
+   ========================================================= */
+picture { display: contents; }
+
+/* Breadcrumb (on navy page heroes) */
+.breadcrumb ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 0; font-size: 14px; color: var(--on-navy); }
+.breadcrumb li { display: inline-flex; align-items: center; }
+.breadcrumb li + li::before { content: '/'; margin: 0 10px; color: var(--sky); opacity: .7; }
+.breadcrumb a { color: var(--on-navy); text-decoration: none; }
+.breadcrumb a:hover { color: #fff; text-decoration: underline; }
+.breadcrumb [aria-current] { color: #fff; }
+.page-hero .actions { margin-top: 6px; }
+
+/* Links */
+.heading-link { color: inherit; text-decoration: none; }
+.heading-link:hover { color: var(--blue); }
+.link-row { display: flex; flex-wrap: wrap; gap: 4px 28px; }
+.link-muted { color: var(--text-muted); }
+.link-muted:hover { color: var(--navy); }
+
+/* Service page */
+.prose-plain .lead-sm { color: var(--text-body); }
+.ticks-lg { gap: 12px; font-size: 17px; }
+.extras { margin-top: 12px; }
+.why-panel { align-self: start; display: flex; flex-direction: column; gap: 14px; padding: 32px; background: #fff; border-radius: var(--radius); border-left: 3px solid var(--blue); box-shadow: var(--shadow); color: var(--text-body); }
+.service-grid-light .service-card { border: 1px solid var(--line-card); box-shadow: var(--shadow); }
+.service-grid-light .service-card:hover { box-shadow: var(--shadow-hover); }
+.bg-tint .service-grid-light .service-card { border-color: #fff; }
+
+/* FAQs */
+.faq-wrap { max-width: 880px; }
+.faq { display: flex; flex-direction: column; gap: 12px; }
+.faq details { background: #fff; border: 1px solid var(--line-card); border-radius: var(--radius); transition: box-shadow .2s ease, border-color .2s ease; }
+.faq details[open] { border-color: var(--blue); box-shadow: var(--shadow); }
+.faq summary { position: relative; list-style: none; cursor: pointer; padding: 20px 56px 20px 24px; font-family: var(--head); font-weight: 700; color: var(--navy); }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: ''; position: absolute; right: 24px; top: 50%; width: 10px; height: 10px; margin-top: -7px; border-right: 2px solid var(--blue); border-bottom: 2px solid var(--blue); transform: rotate(45deg); transition: transform .2s ease; }
+.faq details[open] summary::after { transform: rotate(-135deg); margin-top: -2px; }
+.faq summary:hover { color: var(--blue); }
+.faq details p { margin: 0; padding: 0 24px 22px; color: var(--text-muted); }
+
+/* Insight cards */
+.insight-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr)); gap: 24px; }
+.insight-card { position: relative; display: flex; flex-direction: column; gap: 10px; padding: 28px; background: #fff; border: 1px solid var(--line-card); border-top: 3px solid var(--blue); border-radius: var(--radius); transition: box-shadow .2s ease, transform .2s ease; }
+.insight-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
+.insight-card h3 a { color: var(--navy); text-decoration: none; }
+.insight-card h3 a::after { content: ''; position: absolute; inset: 0; border-radius: var(--radius); }
+.insight-card:hover h3 a { color: var(--blue); }
+.insight-card p { color: var(--text-muted); flex: 1; }
+.insight-card .insight-meta { flex: none; font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--text-soft); }
+.insight-card .link-arrow { margin-top: 4px; }
+.insight-card a:focus-visible::after { outline: 3px solid var(--cyan); outline-offset: 2px; }
+
+/* Article */
+.article-body { margin: 0 auto; }
+.article-body h2 { margin-top: 30px; }
+.article-related { margin-top: 36px; padding: 26px 28px; background: var(--tint); border-left: 3px solid var(--blue); border-radius: var(--radius); display: flex; flex-direction: column; gap: 8px; }
+.article-related h2 { margin: 0; }
+.article-related a { color: var(--navy); }
+.article-back { margin-top: 20px; }
+
+/* Forms on tinted sections */
+.bg-tint .form-panel { background: #fff; box-shadow: var(--shadow); }
+
+@media (max-width: 640px) {
+  .why-panel { padding: 24px 20px; }
+  .faq summary { padding: 18px 48px 18px 18px; }
+  .faq summary::after { right: 18px; }
+  .faq details p { padding: 0 18px 18px; }
+  .insight-card { padding: 22px; }
+}

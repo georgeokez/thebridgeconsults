@@ -1,0 +1,91 @@
+// Articles for the Insights section (/insights).
+// Newest first. Each body is a list of blocks: { h2 }, { p } or { ul: [...] }.
+// To add an article, copy one entry, give it a new unique slug and update the text and date.
+
+module.exports = [
+  {
+    slug: 'signs-your-business-needs-hr-support',
+    title: 'Seven signs your business needs dedicated HR support',
+    description:
+      'From slow hiring to rising turnover, these are the warning signs that your organisation has outgrown informal HR, and what to do about them.',
+    date: '2026-11-10',
+    service: 'hr-outsourcing',
+    body: [
+      { p: 'Most growing businesses handle HR informally at first. A founder or office manager looks after contracts, a few policies live in a shared folder, and problems get solved as they come up. That works for a while. Then the business grows, and the cracks start to show.' },
+      { p: 'Here are seven signs that your organisation needs more structured HR support.' },
+      { h2: '1. Hiring takes too long' },
+      { p: 'If roles stay open for months, or you keep restarting the search, the problem is usually the process rather than the market. Unclear job requirements, slow decisions and unstructured interviews all add delay, and every week a role stays empty puts more pressure on the rest of the team.' },
+      { h2: '2. New hires leave early' },
+      { p: 'When people leave within their first few months, it often points to a weak onboarding experience or a mismatch between the role as advertised and the role as it really is. Both can be fixed with better processes.' },
+      { h2: '3. HR is handled by people with other jobs' },
+      { p: 'Asking a finance lead or operations manager to look after HR on the side means it only gets attention when something goes wrong. It also takes time away from the work they were hired to do.' },
+      { h2: '4. Policies are missing or out of date' },
+      { p: 'Without clear, current policies, managers make different decisions in similar situations. That feels unfair to employees and leaves the business exposed if a dispute arises.' },
+      { h2: '5. Nobody is sure who is responsible for what' },
+      { p: 'Role overlap and unclear accountability slow everything down. A defined workforce structure, with clear roles and reporting lines, is one of the simplest ways to improve performance.' },
+      { h2: '6. Performance conversations don’t happen' },
+      { p: 'If feedback only happens when there’s a problem, good people feel unrecognised and underperformance goes unaddressed. A simple, regular performance process changes that.' },
+      { h2: '7. Turnover keeps rising' },
+      { p: 'Constant re-hiring is expensive and draining. Rising turnover is usually a symptom of the issues above, and it rarely improves until they are addressed.' },
+      { h2: 'What to do next' },
+      { p: 'You don’t need a full in-house HR department to fix these problems. Outsourced HR support or an HR business partner can put the right processes in place, take on day-to-day administration and advise your leadership team, at a scale that suits your business.' },
+    ],
+  },
+  {
+    slug: 'structured-screening-better-hires',
+    title: 'How structured screening leads to better hires',
+    description:
+      'Structured screening replaces gut feel with clear criteria. Here is how it works, and why it leads to better, fairer hiring decisions.',
+    date: '2026-11-10',
+    service: 'recruitment',
+    body: [
+      { p: 'Many hiring decisions still come down to gut feel. A candidate interviews well, the conversation flows, and an offer follows. Sometimes that works. Often it doesn’t, and the cost of a poor hire shows up later in missed targets, team friction and another round of recruitment.' },
+      { p: 'Structured screening is a simple way to make better decisions more consistently.' },
+      { h2: 'Start with a clear role scope' },
+      { p: 'Good screening starts before the first CV arrives. Agree what the role actually needs to deliver, which skills and experience are essential, and which are simply nice to have. Without that clarity, every candidate gets judged against a different standard.' },
+      { h2: 'Screen against the same criteria' },
+      { p: 'Once the criteria are agreed, assess every candidate against them in the same way. That means reviewing CVs for evidence of the essential requirements and asking each shortlisted candidate the same core questions.' },
+      { ul: [
+        'Use the role scope to decide what “good” looks like before you start.',
+        'Ask every candidate the same core questions, so answers can be compared fairly.',
+        'Score answers against the criteria, not against how much you liked the conversation.',
+        'Involve more than one person in the final decision.',
+      ] },
+      { h2: 'Look for evidence, not just confidence' },
+      { p: 'Some candidates are excellent at interviews. Others are excellent at the job. Asking for specific examples of past work, and probing the detail, helps separate the two.' },
+      { h2: 'Keep the shortlist short' },
+      { p: 'A long shortlist feels safe, but it wastes everyone’s time. A smaller number of properly vetted candidates, each with clear reasoning on why they fit, leads to faster and better decisions.' },
+      { h2: 'Don’t stop at the offer' },
+      { p: 'Screening tells you who is most likely to succeed. A structured onboarding plan and early check-ins make sure they actually do.' },
+      { p: 'At The Bridge Consults, structured screening and evaluation sit at the heart of our recruitment process, so you only meet candidates who are properly vetted and fit the role.' },
+    ],
+  },
+  {
+    slug: 'why-onboarding-matters',
+    title: 'Why onboarding decides whether a new hire succeeds',
+    description:
+      'A new hire’s first weeks shape how quickly they become productive and whether they stay. Here is what good onboarding looks like.',
+    date: '2026-11-10',
+    service: 'training',
+    body: [
+      { p: 'A lot of effort goes into finding the right person for a role. Much less goes into what happens after they accept the offer. Yet the first few weeks shape how quickly a new hire becomes productive, how confident they feel, and whether they decide to stay.' },
+      { h2: 'What goes wrong without onboarding' },
+      { p: 'Without a plan, new hires spend their first days waiting for equipment, working out who to ask, and guessing what is expected of them. Even capable people underperform in that situation, and some quietly start looking elsewhere.' },
+      { h2: 'What good onboarding includes' },
+      { ul: [
+        'Paperwork, equipment and system access ready before day one.',
+        'A clear explanation of the role, its priorities and how success will be measured.',
+        'Introductions to the people they will work with most.',
+        'A named person to go to with questions.',
+        'Regular check-ins during the first weeks.',
+      ] },
+      { h2: 'Make expectations clear early' },
+      { p: 'New hires want to do well. Telling them exactly what good looks like in their first month, and their first three months, gives them something concrete to work towards and gives managers a fair basis for feedback.' },
+      { h2: 'Train for the workplace, not just the job' },
+      { p: 'Technical skills matter, but so does understanding how the organisation works: how decisions are made, how teams communicate and what professional standards are expected. Practical onboarding guidance and workplace training help people settle in faster.' },
+      { h2: 'Check in, and act on what you hear' },
+      { p: 'Short, regular conversations during the first weeks catch small problems before they become reasons to leave. They also show new hires that the organisation is invested in their success.' },
+      { p: 'The Bridge Consults supports structured onboarding as part of our HR outsourcing and training services, and we stay close to every placement we make through the first weeks.' },
+    ],
+  },
+];

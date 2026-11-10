@@ -2,6 +2,7 @@
 
 <section class="page-hero bg-navy">
   <div class="container stack">
+    <%- include('partials/breadcrumb') %>
     <p class="eyebrow eyebrow-light">Our services</p>
     <h1 class="h1 measure-h">Comprehensive HR and Workforce Solutions, Aligned with Business Performance.</h1>
     <p class="lead lead-light">The Bridge Consults delivers integrated HR, talent and business support solutions that strengthen workforces, optimise performance and drive sustainable organisational growth.</p>
@@ -12,15 +13,18 @@
   <div class="container stack-xl">
     <% site.services.forEach(function (s, i) { %>
       <article id="<%= s.key %>" class="feature<%= i % 2 === 1 ? ' feature-reverse' : '' %>">
-        <div class="photo-zoom"><img class="photo photo-feature" src="<%= s.image.src %>" alt="<%= s.image.alt %>" width="<%= s.image.w %>" height="<%= s.image.h %>" loading="<%= i === 0 ? 'eager' : 'lazy' %>"></div>
+        <div class="photo-zoom"><%- include('partials/picture', { src: s.image.src, alt: s.image.alt, cls: 'photo photo-feature', w: s.image.w, h: s.image.h, loading: i === 0 ? '' : 'lazy' }) %></div>
         <div class="stack">
           <p class="feature-kicker"><%= String(i + 1).padStart(2, '0') %> · <%= s.name %></p>
-          <h2 class="h2-sm"><%= s.headline %></h2>
+          <h2 class="h2-sm"><a class="heading-link" href="/services/<%= s.key %>"><%= s.headline %></a></h2>
           <p class="muted"><%= s.intro %></p>
           <ul class="ticks">
             <% s.points.forEach(function (p) { %><li><%= p %></li><% }) %>
           </ul>
-          <a href="/contact?service=<%= s.key %>#enquiry" class="link-arrow">Discuss your requirements <span aria-hidden="true">→</span></a>
+          <div class="link-row">
+            <a href="/services/<%= s.key %>" class="link-arrow">More about <%= s.name %> <span aria-hidden="true">→</span></a>
+            <a href="/contact?service=<%= s.key %>#enquiry" class="link-arrow link-muted">Discuss your requirements <span aria-hidden="true">→</span></a>
+          </div>
         </div>
       </article>
     <% }) %>

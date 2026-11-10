@@ -56,3 +56,14 @@ public/js/motion-flag.js Turns animations on before first paint (skipped for red
 public/fonts/            Self-hosted Montserrat and DM Sans (SIL Open Font License)
 public/images/           Logos, icons and photography from the design
 ```
+
+## Search engine optimisation
+
+- **Service pages** live at `/services/recruitment`, `/services/hr-outsourcing` and `/services/training`. Their wording, page titles, meta descriptions and FAQs are in `content/services.js`.
+- **Insights articles** live at `/insights/<slug>`. Add or edit articles in `content/insights.js` (newest first). Each new article is added to the sitemap, the Insights page and the home page automatically.
+- **Structured data** (schema.org JSON-LD) is generated in `server.js`: the business, website, breadcrumbs, services, FAQs, team members and articles.
+- **Sitemap** at `/sitemap.xml` uses `site.updated` (in `site.js`) and article dates as `lastmod`. Update `site.updated` when page content changes.
+- **Images** are served as WebP with a JPG fallback. When adding a new photo, also save a `.webp` copy with the same name next to it.
+- **Sharing image** is `public/images/og-image.jpg` (1200 × 630).
+- Error pages are marked `noindex`.
+- **Regions served**: the business is based in Nigeria and serves clients across Africa and worldwide. Change `seo.reach` and `seo.areaServed` in `site.js` if that changes.

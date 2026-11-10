@@ -1,0 +1,6 @@
+<%# Responsive photo: serves WebP where supported, with the original JPEG as a fallback.
+    Expects: src, alt, cls, w, h, and optionally loading, priority %>
+<picture>
+  <source srcset="<%= webp(src) %>" type="image/webp">
+  <img class="<%= cls %>" src="<%= src %>" alt="<%= alt %>" width="<%= w %>" height="<%= h %>"<% if (typeof loading !== 'undefined' && loading) { %> loading="<%= loading %>"<% } %><% if (typeof priority !== 'undefined' && priority) { %> fetchpriority="high"<% } %> decoding="async">
+</picture>

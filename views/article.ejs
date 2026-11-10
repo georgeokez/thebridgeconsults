@@ -1,0 +1,34 @@
+<%- include('partials/head') %>
+
+<section class="page-hero bg-navy">
+  <div class="container stack">
+    <%- include('partials/breadcrumb') %>
+    <p class="eyebrow eyebrow-light">Insights · <time datetime="<%= article.date %>"><%= formatDate(article.date) %></time></p>
+    <h1 class="h1 measure-h"><%= article.title %></h1>
+    <p class="lead lead-light"><%= article.description %></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <article class="prose article-body">
+      <% article.body.forEach(function (b) { %>
+        <% if (b.h2) { %><h2><%= b.h2 %></h2>
+        <% } else if (b.ul) { %><ul><% b.ul.forEach(function (li) { %><li><%= li %></li><% }) %></ul>
+        <% } else if (b.p) { %><p><%= b.p %></p><% } %>
+      <% }) %>
+      <% if (relatedService) { %>
+        <aside class="article-related">
+          <p class="eyebrow">Related service</p>
+          <h2 class="h4"><a href="/services/<%= relatedService.key %>"><%= relatedService.name %></a></h2>
+          <p><%= relatedService.summary %></p>
+        </aside>
+      <% } %>
+      <p class="article-back"><a href="/insights" class="link-arrow"><span aria-hidden="true">←</span> All insights</a></p>
+    </article>
+  </div>
+</section>
+
+<%- include('partials/cta', { heading: 'Need help with your team?', text: 'Tell us what you need and we’ll come back with a proposal.', button: 'Book a consultation' }) %>
+
+<%- include('partials/foot') %>

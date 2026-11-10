@@ -1,0 +1,10 @@
+<div class="insight-grid">
+  <% items.forEach(function (a) { %>
+    <article class="insight-card">
+      <p class="insight-meta"><time datetime="<%= a.date %>"><%= formatDate(a.date) %></time></p>
+      <h3 class="h4"><a href="/insights/<%= a.slug %>"><%= a.title %></a></h3>
+      <p><%= a.description %></p>
+      <span class="link-arrow" aria-hidden="true">Read article <span>→</span></span>
+    </article>
+  <% }) %>
+</div>

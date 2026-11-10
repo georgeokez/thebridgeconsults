@@ -1,0 +1,20 @@
+<%- include('partials/head') %>
+
+<section class="page-hero bg-navy">
+  <div class="container stack">
+    <%- include('partials/breadcrumb') %>
+    <p class="eyebrow eyebrow-light">Insights</p>
+    <h1 class="h1 measure-h">Practical guidance on hiring, HR and training.</h1>
+    <p class="lead lead-light">Ideas and advice for organisations in <%= site.seo.reach %> that want to hire well, keep their people and build high-performing teams.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <%- include('partials/insight-cards', { items: insights }) %>
+  </div>
+</section>
+
+<%- include('partials/cta', { heading: 'Want to talk about your team?', text: 'Tell us what you need and we’ll come back with a proposal.', button: 'Book a consultation' }) %>
+
+<%- include('partials/foot') %>
