@@ -50,7 +50,9 @@ app.use(
 app.locals.site = site;
 app.locals.siteUrl = SITE_URL;
 app.locals.year = new Date().getFullYear();
-app.locals.insights = insights;
+const insightsOn = Boolean(site.features && site.features.insights);
+app.locals.insights = insightsOn ? insights : [];
+app.locals.insightsOn = insightsOn;
 // WebP version of a photo (generated alongside each .jpg in public/images)
 app.locals.webp = (src) => src.replace(/\.(jpe?g|png)$/i, '.webp');
 // "2026-11-10" -> "10 November 2026"
@@ -82,7 +84,7 @@ function organisationNode(base) {
     areaServed: site.seo.areaServed,
     identifier: { '@type': 'PropertyValue', propertyID: 'CAC RC Number', value: site.registration.rcNumber },
     knowsAbout: site.seo.topics,
-    sameAs: site.social.map((s) => s.url),
+    sameAs: site.social.filter((s) => !s.chat).map((s) => s.url),
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: 'Recruitment and HR services',
@@ -270,7 +272,8 @@ app.get('/about', (req, res) => {
   );
 });
 
-app.get('/insights', (req, res) => {
+app.get('/insights', (req, res, next) => {
+  if (!insightsOn) return next();
   const crumbs = [{ name: 'Home', path: '/' }, { name: 'Insights' }];
   renderPage(
     req,
@@ -288,6 +291,7 @@ app.get('/insights', (req, res) => {
 });
 
 app.get('/insights/:slug', (req, res, next) => {
+  if (!insightsOn) return next();
   const article = insights.find((a) => a.slug === req.params.slug);
   if (!article) return next();
   const crumbs = [{ name: 'Home', path: '/' }, { name: 'Insights', path: '/insights' }, { name: article.title }];
@@ -361,8 +365,12 @@ app.get('/sitemap.xml', (req, res) => {
     { path: '/services', lastmod: site.updated },
     ...site.services.map((s) => ({ path: `/services/${s.key}`, lastmod: site.updated })),
     { path: '/about', lastmod: site.updated },
-    { path: '/insights', lastmod: insights.length ? insights[0].date : site.updated },
-    ...insights.map((a) => ({ path: `/insights/${a.slug}`, lastmod: a.updated || a.date })),
+    ...(insightsOn
+      ? [
+          { path: '/insights', lastmod: insights.length ? insights[0].date : site.updated },
+          ...insights.map((a) => ({ path: `/insights/${a.slug}`, lastmod: a.updated || a.date })),
+        ]
+      : []),
     { path: '/contact', lastmod: site.updated },
     { path: '/privacy', lastmod: site.updated },
   ];

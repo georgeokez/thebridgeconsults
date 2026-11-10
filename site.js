@@ -10,6 +10,12 @@ module.exports = {
     'The Bridge Consults is a Nigeria-based recruitment, HR outsourcing and business partner firm for organisations across Africa and worldwide that need workforce solutions to work, not just look good on paper.',
 
   // Search engine settings
+  // Features that can be switched on later. While insights is false, the Insights
+  // pages, menu link, home page section and sitemap entries are hidden.
+  features: {
+    insights: false,
+  },
+
   seo: {
     country: 'Nigeria', // where the business is based
     countryCode: 'NG',
@@ -83,6 +89,7 @@ module.exports = {
     { label: 'Instagram', icon: 'instagram', url: 'https://www.instagram.com/thebridgeconsults_' },
     { label: 'LinkedIn', icon: 'linkedin', url: 'https://www.linkedin.com/company/136015830' },
     { label: 'Facebook', icon: 'facebook', url: 'https://www.facebook.com/profile.php?id=61593121294521' },
+    { label: 'WhatsApp', icon: 'whatsapp', url: 'https://wa.me/2348025435028', chat: true },
   ],
 
   // Organisations shown in the "supported" strip. Add more as clients agree to be listed.

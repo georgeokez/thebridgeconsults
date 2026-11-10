@@ -60,7 +60,7 @@ public/images/           Logos, icons and photography from the design
 ## Search engine optimisation
 
 - **Service pages** live at `/services/recruitment`, `/services/hr-outsourcing` and `/services/training`. Their wording, page titles, meta descriptions and FAQs are in `content/services.js`.
-- **Insights articles** live at `/insights/<slug>`. Add or edit articles in `content/insights.js` (newest first). Each new article is added to the sitemap, the Insights page and the home page automatically.
+- **Insights articles** (switched off for now: set `features.insights` to `true` in `site.js` to show them) live at `/insights/<slug>`. Add or edit articles in `content/insights.js` (newest first). Each new article is added to the sitemap, the Insights page and the home page automatically.
 - **Structured data** (schema.org JSON-LD) is generated in `server.js`: the business, website, breadcrumbs, services, FAQs, team members and articles.
 - **Sitemap** at `/sitemap.xml` uses `site.updated` (in `site.js`) and article dates as `lastmod`. Update `site.updated` when page content changes.
 - **Images** are served as WebP with a JPG fallback. When adding a new photo, also save a `.webp` copy with the same name next to it.

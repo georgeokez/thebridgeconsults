@@ -55,7 +55,7 @@
       <span class="bar" aria-hidden="true"></span><span class="bar" aria-hidden="true"></span><span class="bar" aria-hidden="true"></span><span class="sr-only">Open menu</span>
     </button>
     <nav id="site-nav" class="site-nav" aria-label="Main">
-      <% [['home', '/', 'Home'], ['about', '/about', 'About'], ['services', '/services', 'Services'], ['insights', '/insights', 'Insights'], ['contact', '/contact', 'Contact']].forEach(function (l) { %>
+      <% [['home', '/', 'Home'], ['about', '/about', 'About'], ['services', '/services', 'Services']].concat(insightsOn ? [['insights', '/insights', 'Insights']] : []).concat([['contact', '/contact', 'Contact']]).forEach(function (l) { %>
         <a href="<%= l[1] %>"<%- page === l[0] ? ' class="active" aria-current="page"' : '' %>><%= l[2] %></a>
       <% }) %>
       <a href="/contact" class="btn btn-primary btn-sm nav-cta">Book a consultation</a>
