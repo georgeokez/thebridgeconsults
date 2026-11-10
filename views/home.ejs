@@ -23,15 +23,15 @@
   <div class="container clients-inner">
     <span class="clients-label">Organisations we have supported</span>
     <ul class="sr-only">
-      <% site.clients.forEach(function (c) { %><li><%= c %></li><% }) %>
+      <% site.clients.forEach(function (c) { %><li><%= c.name %></li><% }) %>
     </ul>
-    <%# Visual loop: the names are repeated to fill the strip, then the whole set is duplicated so the scroll can wrap seamlessly. %>
+    <%# Visual loop: the logos are repeated to fill the strip, then the whole set is duplicated so the scroll can wrap seamlessly. %>
     <% var reps = Math.max(2, Math.ceil(6 / Math.max(site.clients.length, 1))); var loop = []; for (var r = 0; r < reps; r++) loop = loop.concat(site.clients); %>
     <div class="marquee" aria-hidden="true">
       <div class="marquee-track">
         <% [0, 1].forEach(function () { %>
           <ul class="marquee-group">
-            <% loop.forEach(function (c, i) { %><li class="client-name<%= i >= site.clients.length ? ' is-repeat' : '' %>"><%= c %></li><% }) %>
+            <% loop.forEach(function (c, i) { %><li class="client-logo<%= c.shape ? ' client-logo-' + c.shape : '' %><%= i >= site.clients.length ? ' is-repeat' : '' %>"><%- include('partials/picture', { src: c.logo, alt: '', cls: '', w: c.w, h: c.h, lazy: false }) %></li><% }) %>
           </ul>
         <% }) %>
       </div>

@@ -15,7 +15,7 @@
       <p class="eyebrow">Who we are</p>
       <h2 class="h2">We go beyond filling roles to building high-performing teams.</h2>
       <p class="muted">The Bridge is a recruitment, HR support and business partner firm built for organisations that need workforce solutions to work. We combine structured hiring processes, HR outsourcing support and workforce development into a single, operationally aware partnership.</p>
-      <p class="muted">We have supported organisations including <%= site.clients.join(' and ') %>, from successful recruitment projects to full HR business partner services covering talent acquisition, onboarding, employee relations, performance management and HR advisory.</p>
+      <p class="muted">We have supported organisations including <% var names = site.clients.map(function (c) { return c.name; }); %><%= names.length > 1 ? names.slice(0, -1).join(', ') + ' and ' + names[names.length - 1] : names.join('') %>, from successful recruitment projects to full HR business partner services covering talent acquisition, onboarding, employee relations, performance management and HR advisory.</p>
     </div>
     <div class="photo-zoom"><%- include('partials/picture', { src: '/images/puzzle.jpg', alt: 'Team members joining puzzle pieces together', cls: 'photo photo-lg', w: 574, h: 395 }) %></div>
   </div>

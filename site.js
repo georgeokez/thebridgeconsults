@@ -92,8 +92,15 @@ module.exports = {
     { label: 'WhatsApp', icon: 'whatsapp', url: 'https://wa.me/2348025435028', chat: true },
   ],
 
-  // Organisations shown in the "supported" strip. Add more as clients agree to be listed.
-  clients: ['Benson Coleman Associates', 'Ception Health Limited'],
+  // Organisations shown in the "supported" logo strip. Add more as clients agree to be listed.
+  // logo: image in public/images/clients (keep a .webp copy alongside), w/h: its pixel size,
+  // shape: 'wide' for long, short logos, 'round' for circular marks, otherwise standard.
+  clients: [
+    { name: 'Enterprise Life', logo: '/images/clients/client-enterprise-life.png', w: 355, h: 160 },
+    { name: 'Ception Health', logo: '/images/clients/client-ception-health.png', w: 186, h: 35, shape: 'wide' },
+    { name: 'Benson Coleman Associates', logo: '/images/clients/client-benson-coleman.png', w: 231, h: 160 },
+    { name: 'Sankore Investments', logo: '/images/clients/client-sankore-investments.png', w: 510, h: 168 },
+  ],
 
   challenges: [
     { title: 'Difficulty sourcing the right talent', body: 'Roles filled with compromise candidates who don’t last.' },
