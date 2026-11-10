@@ -409,7 +409,10 @@ h1, h2, h3, h4, h5 { margin: 0; font-family: var(--head); color: var(--navy); }
 .marquee-group .client-name::after { content: ''; position: absolute; right: -3px; top: 50%; width: 6px; height: 6px; margin-top: -3px; border-radius: 50%; background: var(--cyan); opacity: .7; }
 @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 .motion .marquee-track { animation: marquee 40s linear infinite; }
-.motion .marquee:hover .marquee-track { animation-play-state: paused; }
+/* Pause on mouse hover only (touch screens keep a sticky :hover after a tap). */
+@media (hover: hover) and (pointer: fine) { .motion .marquee:hover .marquee-track { animation-play-state: paused; } }
+/* On touch screens, pause only while a finger is on the strip (class set in main.js). */
+.motion .marquee.is-held .marquee-track { animation-play-state: paused; }
 /* Without motion (reduced-motion users, or no JavaScript): show each name once, statically */
 html:not(.motion) .marquee { -webkit-mask-image: none; mask-image: none; }
 html:not(.motion) .marquee-track { width: auto; }

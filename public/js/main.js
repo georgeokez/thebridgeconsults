@@ -223,3 +223,14 @@
       });
   });
 })();
+
+// ---------- Client logo strip: pause only while touched ----------
+(function () {
+  document.querySelectorAll('.marquee').forEach(function (m) {
+    var hold = function () { m.classList.add('is-held'); };
+    var release = function () { m.classList.remove('is-held'); };
+    m.addEventListener('touchstart', hold, { passive: true });
+    m.addEventListener('touchend', release, { passive: true });
+    m.addEventListener('touchcancel', release, { passive: true });
+  });
+})();
